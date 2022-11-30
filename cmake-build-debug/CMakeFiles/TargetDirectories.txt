@@ -1,0 +1,14 @@
+/home/sdutton/CLionProjects/UpdateDemo/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/sdutton/CLionProjects/UpdateDemo/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/sdutton/CLionProjects/UpdateDemo/cmake-build-debug/messageV1/CMakeFiles/messageV1.dir
+/home/sdutton/CLionProjects/UpdateDemo/cmake-build-debug/messageV1/CMakeFiles/edit_cache.dir
+/home/sdutton/CLionProjects/UpdateDemo/cmake-build-debug/messageV1/CMakeFiles/rebuild_cache.dir
+/home/sdutton/CLionProjects/UpdateDemo/cmake-build-debug/messageV2/CMakeFiles/messageV2.dir
+/home/sdutton/CLionProjects/UpdateDemo/cmake-build-debug/messageV2/CMakeFiles/edit_cache.dir
+/home/sdutton/CLionProjects/UpdateDemo/cmake-build-debug/messageV2/CMakeFiles/rebuild_cache.dir
+/home/sdutton/CLionProjects/UpdateDemo/cmake-build-debug/UpdaterClient/CMakeFiles/UpdaterClient.dir
+/home/sdutton/CLionProjects/UpdateDemo/cmake-build-debug/UpdaterClient/CMakeFiles/edit_cache.dir
+/home/sdutton/CLionProjects/UpdateDemo/cmake-build-debug/UpdaterClient/CMakeFiles/rebuild_cache.dir
+/home/sdutton/CLionProjects/UpdateDemo/cmake-build-debug/UpdaterService/CMakeFiles/UpdaterService.dir
+/home/sdutton/CLionProjects/UpdateDemo/cmake-build-debug/UpdaterService/CMakeFiles/edit_cache.dir
+/home/sdutton/CLionProjects/UpdateDemo/cmake-build-debug/UpdaterService/CMakeFiles/rebuild_cache.dir
