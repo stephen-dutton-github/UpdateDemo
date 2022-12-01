@@ -19,17 +19,6 @@
 
 int runStatus = 1;
 
-void sendRequest(int sockfd, pRequest request, pResponse response)
-{
-    //write request to socket
-    bzero(response, sizeof(Response));
-    write(sockfd, request, sizeof(Request));
-    read(sockfd, response, sizeof(Response));
-    printf("From Server : %s", updateReq);
-
-}
-
-
 void getCurrentVersion(int sockfd, pRequest request, pResponse response)
 {
     //write request to socket
@@ -90,7 +79,7 @@ int main()
 
     while(runStatus){
         sendRequest(sockfd, req, resp);
-        callHandler(resp);
+        callClientHandler(req, resp);
 
     }
 

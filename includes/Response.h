@@ -8,8 +8,9 @@
 #define UPDATEDEMO_UPDATERESPONSE_H
 
 typedef struct Responses{
-    Status status;
     Version version;
+    Action responseTo;
+    Status status;
     char currentFunctionName[MAX_BUFFER];
     char stackCookie[STACK_COOKIE_LEN];
 } Response, *pResponse;

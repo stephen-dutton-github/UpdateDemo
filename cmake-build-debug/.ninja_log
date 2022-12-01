@@ -1,18 +1,14 @@
 # ninja log v5
 6	11	1669718486994432950	libmessageV1.so	8ef643547557f95
 20	30	1669727971868261441	Client	df8dbe99b938034
-6	12	1669719827830076207	messageV1/libmessageV1.so	a353d846c4f49aae
-0	13	1669839702819918849	build.ninja	3e430b5121401e95
+29	41	1669841177799531423	messageV1/libmessageV1.so	a353d846c4f49aae
+0	13	1669850158693489444	build.ninja	3e430b5121401e95
 22	31	1669727997864164240	UpdaterService/UpdaterService	4971d9ab87324a8e
 27	37	1669727939264382990	Server	9441ecd5bd3018fa
 0	21	1669727992672183671	UpdaterClient/CMakeFiles/UpdaterClient.dir/UpdaterClient.c.o	f7a976bc642892ae
 21	30	1669727992680183642	UpdaterClient/UpdaterClient	edf9c0cb41c6c099
-0	10	1669726663436245671	messageV2/CMakeFiles/messageV2.dir/MessageV2.c.o	f702a57007887315
-0	22	1669727997856164270	UpdaterService/CMakeFiles/UpdaterService.dir/UpdaterService.c.o	701022e926acb34f
-0	6	1669719827822076187	messageV1/CMakeFiles/messageV1.dir/MessageV1.c.o	9bda1ea7cd8a60c0
-10	16	1669726663444245660	messageV2/libmessageV2.so	e89d8be499c58842
-0	29	1669841177787531384	messageV1/CMakeFiles/messageV1.dir/MessageV1.c.o	7a57bf6ae78e7ffe
-29	41	1669841177799531423	messageV1/libmessageV1.so	a353d846c4f49aae
-0	13	1669841192259578544	messageV2/CMakeFiles/messageV2.dir/MessageV2.c.o	31865f6aece0c479
 1	17	1669841192263578557	UpdaterClient/CMakeFiles/UpdaterClient.dir/Handler.c.o	567b52ef3ce67858
+0	13	1669841192259578544	messageV2/CMakeFiles/messageV2.dir/MessageV2.c.o	31865f6aece0c479
+0	22	1669727997856164270	UpdaterService/CMakeFiles/UpdaterService.dir/UpdaterService.c.o	701022e926acb34f
+0	29	1669841177787531384	messageV1/CMakeFiles/messageV1.dir/MessageV1.c.o	7a57bf6ae78e7ffe
 13	18	1669841192267578571	messageV2/libmessageV2.so	e89d8be499c58842

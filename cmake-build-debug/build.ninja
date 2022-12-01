@@ -217,6 +217,13 @@ build UpdaterClient/CMakeFiles/UpdaterClient.dir/Handler.c.o: C_COMPILER__Update
   OBJECT_DIR = UpdaterClient/CMakeFiles/UpdaterClient.dir
   OBJECT_FILE_DIR = UpdaterClient/CMakeFiles/UpdaterClient.dir
 
+build UpdaterClient/CMakeFiles/UpdaterClient.dir/Request.c.o: C_COMPILER__UpdaterClient_Debug /home/sdutton/CLionProjects/UpdateDemo/UpdaterClient/Request.c || cmake_object_order_depends_target_UpdaterClient
+  DEP_FILE = UpdaterClient/CMakeFiles/UpdaterClient.dir/Request.c.o.d
+  FLAGS = -g -fdiagnostics-color=always
+  INCLUDES = -I/home/sdutton/CLionProjects/UpdateDemo/UpdaterClient/../includes
+  OBJECT_DIR = UpdaterClient/CMakeFiles/UpdaterClient.dir
+  OBJECT_FILE_DIR = UpdaterClient/CMakeFiles/UpdaterClient.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target UpdaterClient
@@ -225,7 +232,7 @@ build UpdaterClient/CMakeFiles/UpdaterClient.dir/Handler.c.o: C_COMPILER__Update
 #############################################
 # Link the executable UpdaterClient/UpdaterClient
 
-build UpdaterClient/UpdaterClient: C_EXECUTABLE_LINKER__UpdaterClient_Debug UpdaterClient/CMakeFiles/UpdaterClient.dir/UpdaterClient.c.o UpdaterClient/CMakeFiles/UpdaterClient.dir/Handler.c.o
+build UpdaterClient/UpdaterClient: C_EXECUTABLE_LINKER__UpdaterClient_Debug UpdaterClient/CMakeFiles/UpdaterClient.dir/UpdaterClient.c.o UpdaterClient/CMakeFiles/UpdaterClient.dir/Handler.c.o UpdaterClient/CMakeFiles/UpdaterClient.dir/Request.c.o
   FLAGS = -g
   OBJECT_DIR = UpdaterClient/CMakeFiles/UpdaterClient.dir
   POST_BUILD = :
