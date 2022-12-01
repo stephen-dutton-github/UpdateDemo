@@ -9,6 +9,7 @@
 #include <strings.h> // bzero()
 #include <sys/socket.h>
 #include <unistd.h> // read(), write(), close()
+#include "Connection.h"
 #include "Request.h"
 #include "Response.h"
 #include "Handler.h"
@@ -19,36 +20,18 @@
 
 int runStatus = 1;
 
-void getCurrentVersion(int sockfd, pRequest request, pResponse response)
-{
-    //write request to socket
-    bzero(response, sizeof(Response));
-    write(sockfd, request, sizeof(Request));
-    read(sockfd, response, sizeof(Response));
-}
-
-void initRequest(pRequest req)
-{
-    strcpy(req->stackCookie, STACK_COOKIE_FAKE);
-    strcpy(req->functionName, "getVersionMessage");
-    strcpy(req->libPath, "../messageV1/libmessageV1.so");
-    printf("Enforce Default values for Demo Startup: %s; %s \n", req->libPath, req->functionName);
-}
-
-
-int main()
-{
-    int sockfd, connfd;
+int initClientConnection(void* data){
+    int socketFileDesc;
     struct sockaddr_in servaddr, cli;
 
     // socket create and verification
-    sockfd = socket(AF_INET, SOCK_STREAM, 0);
-    if (sockfd == -1) {
+    socketFileDesc = socket(AF_INET, SOCK_STREAM, 0);
+    if (socketFileDesc == -1) {
         printf("socket creation failed...\n");
         exit(0);
     }
-    else
-        printf("Socket successfully created..\n");
+
+    printf("Socket successfully created..\n");
     bzero(&servaddr, sizeof(servaddr));
 
     // assign IP, PORT
@@ -57,32 +40,40 @@ int main()
     servaddr.sin_port = htons(PORT);
 
     // connect the client socket to server socket
-    if (connect(sockfd, (SA*)&servaddr, sizeof(servaddr))
-        != 0) {
-        printf("connection with update server failed...\n");
+    if (connect(socketFileDesc, (SA*)&servaddr, sizeof(servaddr))  != 0) {
+        printf("connection with update server failed... \nEnsure the server is started.\n");
         exit(0);
     }
-    else
-        printf("connected to the server..\n");
 
-    // function for update Request
-
-
+    printf("connected to the server..\n");
+    return socketFileDesc;
+}
+void closeConnection(int fd){
+    close(fd);
+    printf("server connection closed.. (and any other clear up)\n");
+}
+int main()
+{
+    int socketFileDesc=-1;
     pRequest req = malloc(sizeof(Request));
     pResponse resp = malloc(sizeof(Response));
 
     bzero(req,sizeof(Request));
-    bzero(resp,sizeof(Response));
+
+    initRequest(req);
+    signRequest(req);
+    //socketFileDesc = initClientConnection(NULL);
 
     while(runStatus){
-        sendRequest(sockfd, req, resp);
+        //sendRequest(socketFileDesc, req, resp);
         callClientHandler(req, resp);
-
     }
 
-
-    // close the socket
+    //dispose of reserved memory
     free(req);
     free(resp);
-    close(sockfd);
+    closeConnection(socketFileDesc);
+
 }
+
+

@@ -15,6 +15,7 @@ typedef struct Responses{
     char stackCookie[STACK_COOKIE_LEN];
 } Response, *pResponse;
 
+void initResponse(pResponse);
 void signResponse(pResponse);
 int checkResponse(pResponse);
 void sendResponse(int fd, void* request, pResponse response);

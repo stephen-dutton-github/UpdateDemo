@@ -15,9 +15,10 @@
 
 void initRequest(pRequest req)
 {
-    strcpy(req->stackCookie, STACK_COOKIE_FAKE);
+    req->ver = V1;
+    req->cmd =WhatIsTheCurrentVersion;
     strcpy(req->functionName, "getVersionMessage");
-    strcpy(req->libPath, "../messageV1/libmessageV1.so");
+    sprintf(req->libPath,SYMBOL_NAME_DEFAULT,req->ver,req->ver);
     printf("Enforce Default values for Demo Startup: %s; %s \n", req->libPath, req->functionName);
 }
 

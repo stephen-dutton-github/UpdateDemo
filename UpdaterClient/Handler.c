@@ -13,18 +13,19 @@
 
 VersionMessageHandler versionMessageHandler;
 
-void* callClientHandler(pRequest requ, pResponse resp)
+void* callClientHandler(pRequest req, pResponse resp)
 {
-    void* hLib = dlopen(requ->libPath, RTLD_LAZY);
+    void* hLib = dlopen(req->libPath, RTLD_LAZY);
     if(hLib == NULL){
         printf("The message version %u cannot be loaded", resp->version);
         return 0;
     }
     void* data = "Any data";
-    versionMessageHandler = (VersionMessageHandler)dlsym(hLib,requ->functionName);
+    versionMessageHandler = (VersionMessageHandler)dlsym(hLib, req->functionName);
 
     //risky on main thread... let's crash the client
     char * restrict theMessage = versionMessageHandler(data); ///TODO: central callback to the underlying code asset
     printf("Message version received from server: %s \n", theMessage);
+    dlclose(hLib);
 
 }

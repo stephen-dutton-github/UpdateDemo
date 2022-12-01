@@ -4,4 +4,3 @@ include_directories(../includes)
 add_executable(UpdaterClient UpdaterClient.c ../includes/Handler.h Handler.c Request.c ../includes/Connection.h)
 
 
-

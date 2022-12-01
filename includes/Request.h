@@ -21,15 +21,7 @@ typedef struct Requests{
 
 #endif //UPDATEDEMO_UPDATEREQUEST_H
 
-void initRequest(void* req)
-{
-    strcpy(req->stackCookie, STACK_COOKIE_FAKE);
-    strcpy(req->functionName, "getVersionMessage");
-    strcpy(req->libPath, "../messageV1/libmessageV1.so");
-    printf("Enforce Default values for Demo Startup: %s; %s \n", req->libPath, req->functionName);
-}
-
-
+void initRequest(pRequest req);
 void signRequest(pRequest);
 int checkRequest(pRequest);
 void sendRequest(int fd, pRequest request, void* response);
