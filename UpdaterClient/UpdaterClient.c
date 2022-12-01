@@ -25,17 +25,20 @@ void getCurrentVersion(int sockfd, pRequest request, pResponse response)
     bzero(response, sizeof(Response));
     write(sockfd, request, sizeof(Request));
     read(sockfd, response, sizeof(Response));
-    printf("From Server : %s", updateReq);
-
 }
 
+void initRequest(pRequest req)
+{
+    strcpy(req->stackCookie, STACK_COOKIE_FAKE);
+    strcpy(req->functionName, "getVersionMessage");
+    strcpy(req->libPath, "../messageV1/libmessageV1.so");
+    printf("Enforce Default values for Demo Startup: %s; %s \n", req->libPath, req->functionName);
+}
 
 
 int main()
 {
-
     int sockfd, connfd;
-
     struct sockaddr_in servaddr, cli;
 
     // socket create and verification
@@ -70,12 +73,6 @@ int main()
 
     bzero(req,sizeof(Request));
     bzero(resp,sizeof(Response));
-
-
-    strcpy(req->stackCookie, STACK_COOKIE_FAKE);
-    strcpy(req->functionName, "getVersionMessage");
-    strcpy(req->libPath, "./libmessageV1.so");
-    printf("Enforce Default values for Demo Startup: %s; %s \n", req->libPath, req->functionName);
 
     while(runStatus){
         sendRequest(sockfd, req, resp);

@@ -11,11 +11,13 @@
 
 // dlopen, dlsym, dlclose
 
+VersionMessageHandler versionMessageHandler;
+
 void* callClientHandler(pRequest requ, pResponse resp)
 {
     void* hLib = dlopen(requ->libPath, RTLD_LAZY);
     if(hLib == NULL){
-        printf("The message version %s cannot be loaded", resp->version);
+        printf("The message version %u cannot be loaded", resp->version);
         return 0;
     }
     void* data = "Any data";

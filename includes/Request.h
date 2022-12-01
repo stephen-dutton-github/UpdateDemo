@@ -14,11 +14,22 @@ typedef struct Requests{
     char msgBuffer[MAX_MSG_BUFFER];
     char functionName[MAX_BUFFER];
     char libPath[MAX_PATH];
-    char stackCookie[STACK_COOKIE_LEN]
+    char stackCookie[STACK_COOKIE_LEN];
 } Request, *pRequest;
+
+
+
+#endif //UPDATEDEMO_UPDATEREQUEST_H
+
+void initRequest(void* req)
+{
+    strcpy(req->stackCookie, STACK_COOKIE_FAKE);
+    strcpy(req->functionName, "getVersionMessage");
+    strcpy(req->libPath, "../messageV1/libmessageV1.so");
+    printf("Enforce Default values for Demo Startup: %s; %s \n", req->libPath, req->functionName);
+}
+
 
 void signRequest(pRequest);
 int checkRequest(pRequest);
 void sendRequest(int fd, pRequest request, void* response);
-
-#endif //UPDATEDEMO_UPDATEREQUEST_H

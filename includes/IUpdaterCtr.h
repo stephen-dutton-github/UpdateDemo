@@ -8,7 +8,7 @@
 #define MAX_BUFFER 64
 #define MAX_MSG_BUFFER 140
 #define STACK_COOKIE_LEN 40
-#define STACK_COOKIE_FAKE "5b9c35cf155a17f850a160956e13ecdb4be6a500"    //would be supplied by hashing function
+#define STACK_COOKIE_FAKE "59c35cf155a17f850a160956e13ecdb4be6a500"    //would be supplied by hashing function
 
 #ifndef UPDATEDEMO_ABIDEFINITION_H
 #define UPDATEDEMO_ABIDEFINITION_H

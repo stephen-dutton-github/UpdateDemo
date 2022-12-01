@@ -13,6 +13,15 @@
 #include "Response.h"
 
 
+void initRequest(pRequest req)
+{
+    strcpy(req->stackCookie, STACK_COOKIE_FAKE);
+    strcpy(req->functionName, "getVersionMessage");
+    strcpy(req->libPath, "../messageV1/libmessageV1.so");
+    printf("Enforce Default values for Demo Startup: %s; %s \n", req->libPath, req->functionName);
+}
+
+
 void signRequest(pRequest req){
     //digest authentication on the struct
     bzero(req->stackCookie, sizeof(char) * STACK_COOKIE_LEN);
@@ -30,5 +39,4 @@ void sendRequest(int fd, pRequest request, void* response)
     bzero(response, sizeof(Response));
     write(fd, request, sizeof(Request));
     read(fd, response, sizeof(Response));
-
 }

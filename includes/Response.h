@@ -17,7 +17,7 @@ typedef struct Responses{
 
 void signResponse(pResponse);
 int checkResponse(pResponse);
-void sendResponse(int fd, void* request, pResponse response)
+void sendResponse(int fd, void* request, pResponse response);
 
 #endif //UPDATEDEMO_UPDATERESPONSE_H
 
