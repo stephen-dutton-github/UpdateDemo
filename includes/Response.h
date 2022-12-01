@@ -11,6 +11,7 @@ typedef struct Responses{
     Version version;
     Action responseTo;
     Status status;
+    char data[MAX_DATA];
     char currentFunctionName[MAX_BUFFER];
     char stackCookie[STACK_COOKIE_LEN];
 } Response, *pResponse;

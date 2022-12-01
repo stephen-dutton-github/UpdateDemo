@@ -17,11 +17,10 @@ typedef struct Requests{
     char stackCookie[STACK_COOKIE_LEN];
 } Request, *pRequest;
 
-
+void initRequest(pRequest);
+void signRequest(pRequest);
+void sendRequest(int,pRequest,void*);
+int checkRequest(pRequest);
 
 #endif //UPDATEDEMO_UPDATEREQUEST_H
 
-void initRequest(pRequest req);
-void signRequest(pRequest);
-int checkRequest(pRequest);
-void sendRequest(int fd, pRequest request, void* response);

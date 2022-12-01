@@ -17,6 +17,7 @@
 #define MAX 80
 #define PORT 8080
 #define SA struct sockaddr
+#define SERVER_EXE "../UpdaterService/UpdaterService &"
 
 int runStatus = 1;
 
@@ -40,14 +41,23 @@ int initClientConnection(void* data){
     servaddr.sin_port = htons(PORT);
 
     // connect the client socket to server socket
-    if (connect(socketFileDesc, (SA*)&servaddr, sizeof(servaddr))  != 0) {
-        printf("connection with update server failed... \nEnsure the server is started.\n");
-        exit(0);
-    }
-
+    int retry = 0;
+    int server = 0;
+    do {
+        if (connect(socketFileDesc, (SA *) &servaddr, sizeof(servaddr)) != 0)
+        {
+            printf("Connection failed... \nTrying to start server...\n Please Wait..\n");
+            server = system(SERVER_EXE);
+            retry++;
+            sleep(1);
+        } else{
+            break;
+        }
+    } while (retry < 2);
     printf("connected to the server..\n");
     return socketFileDesc;
 }
+
 void closeConnection(int fd){
     close(fd);
     printf("server connection closed.. (and any other clear up)\n");
@@ -73,7 +83,6 @@ int main()
     free(req);
     free(resp);
     closeConnection(socketFileDesc);
-
 }
 
 

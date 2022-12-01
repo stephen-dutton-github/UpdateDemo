@@ -14,9 +14,6 @@
 #ifndef UPDATEDEMO_CONNECTION_H
 #define UPDATEDEMO_CONNECTION_H
 
-#endif //UPDATEDEMO_CONNECTION_H
-
-
 #define MAX 80
 #define PORT 8080
 #define SA struct sockaddr
@@ -26,3 +23,7 @@
 int initServerConnection(void* data);
 int initClientConnection(void* data);
 void closeConnection(int fd);
+
+#endif //UPDATEDEMO_CONNECTION_H
+
+

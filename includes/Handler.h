@@ -12,7 +12,7 @@
 
 //Messaging delegate callback
 
-void* callClientHandler(pRequest req, pResponse resp);
-void* callServerHandler(pRequest requ, pResponse resp);
+void* callClientHandler(pRequest, pResponse);
+void* callServerHandler(pRequest, pResponse);
 
 #endif //UPDATEDEMO_MESSAGEHANDLER_H
