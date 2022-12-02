@@ -284,6 +284,13 @@ build UpdaterService/CMakeFiles/UpdaterService.dir/UpdaterService.c.o: C_COMPILE
   OBJECT_DIR = UpdaterService/CMakeFiles/UpdaterService.dir
   OBJECT_FILE_DIR = UpdaterService/CMakeFiles/UpdaterService.dir
 
+build UpdaterService/CMakeFiles/UpdaterService.dir/Response.c.o: C_COMPILER__UpdaterService_Debug /home/sdutton/CLionProjects/UpdateDemo/UpdaterService/Response.c || cmake_object_order_depends_target_UpdaterService
+  DEP_FILE = UpdaterService/CMakeFiles/UpdaterService.dir/Response.c.o.d
+  FLAGS = -g -fdiagnostics-color=always
+  INCLUDES = -I/home/sdutton/CLionProjects/UpdateDemo/UpdaterService/../includes
+  OBJECT_DIR = UpdaterService/CMakeFiles/UpdaterService.dir
+  OBJECT_FILE_DIR = UpdaterService/CMakeFiles/UpdaterService.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target UpdaterService
@@ -292,7 +299,7 @@ build UpdaterService/CMakeFiles/UpdaterService.dir/UpdaterService.c.o: C_COMPILE
 #############################################
 # Link the executable UpdaterService/UpdaterService
 
-build UpdaterService/UpdaterService: C_EXECUTABLE_LINKER__UpdaterService_Debug UpdaterService/CMakeFiles/UpdaterService.dir/UpdaterService.c.o
+build UpdaterService/UpdaterService: C_EXECUTABLE_LINKER__UpdaterService_Debug UpdaterService/CMakeFiles/UpdaterService.dir/UpdaterService.c.o UpdaterService/CMakeFiles/UpdaterService.dir/Response.c.o
   FLAGS = -g
   OBJECT_DIR = UpdaterService/CMakeFiles/UpdaterService.dir
   POST_BUILD = :

@@ -15,67 +15,44 @@
 typedef void* (*CallRouter)(pRequest,pResponse) ;
 
 //Prototypes
-void* onVersionResponse(pRequest req, pResponse resp);
-void* onShutdownResponse(pRequest req, pResponse resp);
-void* onAuxiliaryResponse(pRequest req, pResponse resp);
-void* onUpdateResponse(pRequest req, pResponse resp);
-void* onMessageResponse(pRequest req, pResponse resp);
+void* onVersionRequest(pRequest req, pResponse resp);
+void* onShutdownRequest(pRequest req, pResponse resp);
+void* onAuxiliaryRequest(pRequest req, pResponse resp);
+void* onUpdateRequest(pRequest req, pResponse resp);
+void* onMessageRequest(pRequest req, pResponse resp);
+
+
 
 //Implementations
-void* callClientHandler(pRequest req, pResponse resp)
+void* callServerHandler(pRequest req, pResponse resp, ApplicationTrunkHandler ath)
 {
     CallRouter router;
     switch (resp->responseTo) {
         case WhatIsTheCurrentVersion:
-            router = onVersionResponse;
+            router = onVersionRequest;
             break;
 
         case Shutdown:
-            router = onShutdownResponse;
+            router = onShutdownRequest;
             break;
 
         case Aux:
-            router = onAuxiliaryResponse;
+            router = onAuxiliaryRequest;
             break;
 
         case Update:
-            router = onUpdateResponse;
+            router = onUpdateRequest;
             break;
 
         case DisplayMessage:
-            router = onMessageResponse;
+            router = onMessageRequest;
             break;
 
     }
     router(req,resp);
 }
-void* onVersionResponse(pRequest req, pResponse resp){
-
-    VersionMessageHandler versionMessageHandler;
-    void* hLib = dlopen(req->libPath, RTLD_LAZY);
-    if(hLib == NULL){
-        printf("The message version %u cannot be loaded", resp->version);
-        return 0;
-    }
-    void* data = "Any data";
-    versionMessageHandler = (VersionMessageHandler)dlsym(hLib, req->functionName);
-
-    //risky on main thread... let's crash the client
-    char * restrict theMessage = versionMessageHandler(data);
-    printf("Message version received from server: %s \n", theMessage);
-    dlclose(hLib);
-};
-void* onShutdownResponse(pRequest req, pResponse resp){
-    printf("Closing down.\nClient will exit.\n");
-    exit(0);
-}
-void* onMessageResponse(pRequest req, pResponse resp){
-    printf("Message response from server. the message:\n%s\n was displayed\n", resp->data);
-}
-void* onAuxiliaryResponse(pRequest req, pResponse resp){
-    printf("Auxiliary response: %s", resp->data);
-};
-void* onUpdateResponse(pRequest req, pResponse resp){
-
-    printf("updated function name: %s", resp->currentFunctionName);
-};
+void* onVersionRequest(pRequest req, pResponse resp){};
+void* onShutdownRequest(pRequest req, pResponse resp){};
+void* onAuxiliaryRequest(pRequest req, pResponse resp){};
+void* onUpdateRequest(pRequest req, pResponse resp){};
+void* onMessageRequest(pRequest req, pResponse resp){};

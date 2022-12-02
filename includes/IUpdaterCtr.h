@@ -18,6 +18,7 @@ typedef enum {V1=1,V2=2,V3=3} Version;
 typedef enum {WhatIsTheCurrentVersion, Update, Shutdown, DisplayMessage, Aux } Action;
 typedef enum {SUCCESS, FAILURE} Status;
 typedef char* restrict (*VersionMessageHandler)(void*);
+typedef void (*ApplicationTrunkHandler)(Action);
 char* restrict getVersionMessage(void*);
 
 #endif //UPDATEDEMO_ABIDEFINITION_H

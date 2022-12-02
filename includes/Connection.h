@@ -20,7 +20,7 @@
 
 
 //Specify NULL for local
-int initServerConnection(void* data);
+int initServerConnection(int* pSocketFileDesc);
 int initClientConnection(void* data);
 void closeConnection(int fd);
 

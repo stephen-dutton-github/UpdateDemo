@@ -1,7 +1,7 @@
 //
 // Created by sdutton on 29.11.22.
 //
-
+#include <unistd.h>
 #include <dlfcn.h>
 #include <stddef.h>
 #include <stdio.h>
@@ -12,7 +12,7 @@
 // dlopen, dlsym, dlclose
 
 //handler event delegate
-typedef void* (*CallRouter)(pRequest,pResponse) ;
+typedef void* (*CallRouter)(pRequest,pResponse, int,int) ;
 
 //Prototypes
 void* onVersionResponse(pRequest req, pResponse resp);
@@ -47,7 +47,7 @@ void* callClientHandler(pRequest req, pResponse resp)
             break;
 
     }
-    router(req,resp);
+    router(req,resp, sfd, cfd);
 }
 void* onVersionResponse(pRequest req, pResponse resp){
 
@@ -65,17 +65,21 @@ void* onVersionResponse(pRequest req, pResponse resp){
     printf("Message version received from server: %s \n", theMessage);
     dlclose(hLib);
 };
+
+
 void* onShutdownResponse(pRequest req, pResponse resp){
     printf("Closing down.\nClient will exit.\n");
-    exit(0);
+    //exit(0);
 }
+
 void* onMessageResponse(pRequest req, pResponse resp){
     printf("Message response from server. the message:\n%s\n was displayed\n", resp->data);
 }
+
 void* onAuxiliaryResponse(pRequest req, pResponse resp){
     printf("Auxiliary response: %s", resp->data);
-};
-void* onUpdateResponse(pRequest req, pResponse resp){
+}
 
+void* onUpdateResponse(pRequest req, pResponse resp){
     printf("updated function name: %s", resp->currentFunctionName);
-};
+}

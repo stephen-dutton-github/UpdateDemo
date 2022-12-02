@@ -8,6 +8,8 @@
 #define UPDATEDEMO_UPDATERESPONSE_H
 
 typedef struct Responses{
+    int socketFileDescriptor;
+    int clientFileDescriptor;
     Version version;
     Action responseTo;
     Status status;

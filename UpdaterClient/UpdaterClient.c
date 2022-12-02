@@ -22,29 +22,26 @@
 int runStatus = 1;
 
 int initClientConnection(void* data){
-    int socketFileDesc;
-    struct sockaddr_in servaddr, cli;
+    int sfd;
+    struct sockaddr_in serverAddress;
 
-    // socket create and verification
-    socketFileDesc = socket(AF_INET, SOCK_STREAM, 0);
-    if (socketFileDesc == -1) {
+    sfd = socket(AF_INET, SOCK_STREAM, 0);
+    if (sfd == -1) {
         printf("socket creation failed...\n");
         exit(0);
     }
 
     printf("Socket successfully created..\n");
-    bzero(&servaddr, sizeof(servaddr));
+    bzero(&serverAddress, sizeof(serverAddress));
 
-    // assign IP, PORT
-    servaddr.sin_family = AF_INET;
-    servaddr.sin_addr.s_addr = inet_addr("127.0.0.1");
-    servaddr.sin_port = htons(PORT);
+    serverAddress.sin_family = AF_INET;
+    serverAddress.sin_addr.s_addr = inet_addr("127.0.0.1");
+    serverAddress.sin_port = htons(PORT);
 
-    // connect the client socket to server socket
     int retry = 0;
     int server = 0;
     do {
-        if (connect(socketFileDesc, (SA *) &servaddr, sizeof(servaddr)) != 0)
+        if (connect(sfd, (SA *) &serverAddress, sizeof(serverAddress)) != 0)
         {
             printf("Connection failed... \nTrying to start server...\n Please Wait..\n");
             server = system(SERVER_EXE);
@@ -55,34 +52,39 @@ int initClientConnection(void* data){
         }
     } while (retry < 2);
     printf("connected to the server..\n");
-    return socketFileDesc;
+    return sfd;
 }
 
 void closeConnection(int fd){
     close(fd);
     printf("server connection closed.. (and any other clear up)\n");
 }
+
+void onTrunkRequest(Action action){
+
+}
+
 int main()
 {
-    int socketFileDesc=-1;
+    ApplicationTrunkHandler ath = onTrunkRequest;
+    int sfd=-1;
     pRequest req = malloc(sizeof(Request));
     pResponse resp = malloc(sizeof(Response));
-
     bzero(req,sizeof(Request));
 
     initRequest(req);
     signRequest(req);
-    //socketFileDesc = initClientConnection(NULL);
+    sfd = initClientConnection(NULL);
 
     while(runStatus){
-        //sendRequest(socketFileDesc, req, resp);
-        callClientHandler(req, resp);
+        sendRequest(sfd, req, resp);
+        callClientHandler(req, resp, ath);
     }
 
     //dispose of reserved memory
     free(req);
     free(resp);
-    closeConnection(socketFileDesc);
+    closeConnection(sfd);
 }
 
 
