@@ -19,7 +19,11 @@
 #define SA struct sockaddr
 #define SERVER_EXE "../UpdaterService/UpdaterService &"
 
-int runStatus = 1;
+volatile int runStatus = 1;
+
+ApplicationProgressHandler applicationProgressHandler;
+
+ApplicationTrunkHandler applicationTrunkHandler;
 
 int initClientConnection(void* data){
     int sfd;
@@ -60,25 +64,34 @@ void closeConnection(int fd){
     printf("server connection closed.. (and any other clear up)\n");
 }
 
-void onTrunkRequest(Action action){
+void onTrunkRequest(void*){
 
+}
+
+void onProgress(int* current, int* target){
+    double descr=100.0*((double)*current);
+    double denom=100.0*((double)*target);
+    double perc= (descr / denom);
+    printf(PROGRESS_MASK, perc);
 }
 
 int main()
 {
-    ApplicationTrunkHandler ath = onTrunkRequest;
+    applicationTrunkHandler = onTrunkRequest;
+    applicationProgressHandler = onProgress;
+
     int sfd=-1;
     pRequest req = malloc(sizeof(Request));
     pResponse resp = malloc(sizeof(Response));
-    bzero(req,sizeof(Request));
 
+    bzero(req,sizeof(Request));
     initRequest(req);
     signRequest(req);
     sfd = initClientConnection(NULL);
 
     while(runStatus){
-        sendRequest(sfd, req, resp);
-        callClientHandler(req, resp, ath);
+        runStatus = sendRequest(sfd, req, resp, applicationProgressHandler);
+        callClientHandler(req, resp, applicationTrunkHandler);
     }
 
     //dispose of reserved memory

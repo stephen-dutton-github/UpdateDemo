@@ -8,11 +8,12 @@
 #define UPDATEDEMO_UPDATERESPONSE_H
 
 typedef struct Responses{
-    int socketFileDescriptor;
-    int clientFileDescriptor;
+    Envelope envelope;
     Version version;
     Action responseTo;
     Status status;
+    char functionName[MAX_BUFFER];
+    char libPath[MAX_PATH];
     char data[MAX_DATA];
     char currentFunctionName[MAX_BUFFER];
     char stackCookie[STACK_COOKIE_LEN];
@@ -21,7 +22,7 @@ typedef struct Responses{
 void initResponse(pResponse);
 void signResponse(pResponse);
 int checkResponse(pResponse);
-void sendResponse(int fd, void* request, pResponse response);
+void sendResponse(int fd, void* request, pResponse response, void (*)(int*,int*));
 
 #endif //UPDATEDEMO_UPDATERESPONSE_H
 

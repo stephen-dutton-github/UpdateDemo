@@ -19,3 +19,7 @@
 0	19	1669942696027576798	UpdaterClient/CMakeFiles/UpdaterClient.dir/Request.c.o	ff0cdc831145ab43
 1	22	1669942785194869097	UpdaterClient/CMakeFiles/UpdaterClient.dir/UpdaterClient.c.o	bddb6927892d0725
 22	33	1669942785202869036	UpdaterClient/UpdaterClient	50df2fef18050ca7
+0	39	1669991899456446900	UpdaterClient/CMakeFiles/UpdaterClient.dir/Request.c.o	ff0cdc831145ab43
+0	39	1669991899456446900	UpdaterClient/CMakeFiles/UpdaterClient.dir/UpdaterClient.c.o	bddb6927892d0725
+0	18	1669995719208522149	UpdaterClient/CMakeFiles/UpdaterClient.dir/ClientHandler.c.o	e02158249236e4c
+18	35	1669995719228522070	UpdaterClient/UpdaterClient	50df2fef18050ca7

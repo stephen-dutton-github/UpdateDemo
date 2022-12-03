@@ -14,11 +14,12 @@
 
 void initRequest(pRequest req)
 {
-    req->ver = V1;
+    req->envelope = REQUEST;
+    req->version = V1;
     req->cmd =WhatIsTheCurrentVersion;
-    strcpy(req->functionName, "getVersionMessage");
-    sprintf(req->libPath,SYMBOL_NAME_DEFAULT,req->ver,req->ver);
-    printf("Enforce Default values for Demo Startup: %s; %s \n", req->libPath, req->functionName);
+    strcpy(req->symbolName, SYM_DEFAULT_NAME);
+    sprintf(req->libPath, LIB_DEFAULT_PATH, req->version, req->version);
+    printf("Enforce Default values for Demo Startup: %s; %s \n", req->libPath, req->symbolName);
 }
 
 
@@ -28,15 +29,37 @@ void signRequest(pRequest req){
     strcpy(req->stackCookie,STACK_COOKIE_FAKE);
 }
 
-int checkRequest(pRequest){
+int checkRequest(pRequest req){
     //Some hashing logic check
     return 1;
 }
 
-void sendRequest(int fd, pRequest request, void* response)
+int sendRequest(int fd, pRequest request, void* response, void (*pgHandler)(int*,int*))
 {
     //write request to socket
-    bzero(response, sizeof(Response));
-    write(fd, request, sizeof(Request));
-    read(fd, response, sizeof(Response));
+
+    int pSizeRequest = sizeof(Request);
+    int pSizeResponse = sizeof(Response);
+    int progress = 0;
+    bzero(response, pSizeResponse);
+
+    printf("Sending request...\n");
+    while(pSizeRequest > progress) {
+        progress += write(fd, request, pSizeRequest);
+        if(pgHandler != NULL) {
+            pgHandler(&progress, &pSizeRequest);
+        }
+    }
+
+    progress=0;
+    while(pSizeResponse > progress) {
+        progress += read(fd, request, pSizeResponse);
+        if(pgHandler != NULL) {
+            pgHandler(&progress, &pSizeResponse);
+        }
+    }
+
+    while
+    read(fd, response, pSizeResponse);
+    return 0;
 }
