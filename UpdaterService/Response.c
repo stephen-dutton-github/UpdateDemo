@@ -7,5 +7,5 @@
 void initResponse(pResponse);
 void signResponse(pResponse);
 int checkResponse(pResponse);
-void sendResponse(int fd, void* request, pResponse response);
+void sendResponse(int fd, void* request, pResponse response,void (*)(int*,int*));
 

@@ -40,7 +40,7 @@ int sendRequest(int fd, pRequest request, void* response, void (*pgHandler)(int*
 
     int pSizeRequest = sizeof(Request);
     int pSizeResponse = sizeof(Response);
-    int progress = 0;
+    int progress = 0, lastValue;
     bzero(response, pSizeResponse);
 
     printf("Sending request...\n");
@@ -51,11 +51,14 @@ int sendRequest(int fd, pRequest request, void* response, void (*pgHandler)(int*
         }
     }
 
-    progress=0;
+    printf("Await Response...\n");
+    progress= lastValue =0;
     while(pSizeResponse > progress) {
-        progress += read(fd, request, pSizeResponse);
-        if(pgHandler != NULL) {
-            pgHandler(&progress, &pSizeResponse);
+        progress += lastValue = read(fd, request, pSizeResponse);
+        if(lastValue != 0) {
+            if (pgHandler != NULL) {
+                pgHandler(&progress, &pSizeResponse);
+            }
         }
     }
 

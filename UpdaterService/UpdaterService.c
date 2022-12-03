@@ -21,7 +21,9 @@
 
 int runStatus = 1;
 
-// Driver function
+ApplicationProgressHandler applicationProgressHandler=0;
+ApplicationTrunkHandler applicationTrunkHandler=0;
+
 int main()
 {
 
@@ -42,16 +44,12 @@ int main()
         exit(0);
     }
 
-    while(1){
+    while(runStatus){
         read(sfd, req,sizeof(Request));
-        callServerHandler(req,resp);
+        callServerHandler(req,resp,applicationTrunkHandler);
     }
 
     printf("Server listening..\n");
-
-
-
-
     closeConnection(sfd);
 }
 
