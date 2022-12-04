@@ -88,8 +88,8 @@ int main()
     sfd = initClientConnection(NULL);
 
     while(runStatus){
-        runStatus = sendRequest(sfd, req, resp, applicationProgressHandler);
-        callClientHandler(req, resp, applicationTrunkHandler);
+        runStatus = sendRequest(sfd, req, resp, sblock);
+        callClientHandler(req, resp, sblock);
     }
 
     //dispose of reserved memory

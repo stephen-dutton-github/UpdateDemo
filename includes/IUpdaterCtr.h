@@ -12,7 +12,7 @@
 #define MAX_BUFFER 64
 #define MAX_MSG_BUFFER 140
 #define STACK_COOKIE_LEN 40
-#define PROGRESS_MASK "\rWorking %02D%"
+#define PROGRESS_MASK "Working %02f"
 
 
 ///TODO: Supply Hashing Function
