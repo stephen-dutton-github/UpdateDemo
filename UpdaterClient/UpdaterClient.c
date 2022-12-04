@@ -12,7 +12,7 @@
 #include "Connection.h"
 #include "Request.h"
 #include "Response.h"
-#include "Handler.h"
+#include "ClientHandler.h"
 
 #define MAX 80
 #define PORT 8080
@@ -22,7 +22,6 @@
 volatile int runStatus = 1;
 
 ApplicationProgressHandler applicationProgressHandler;
-
 ApplicationTrunkHandler applicationTrunkHandler;
 
 int initClientConnection(void* data){
@@ -77,10 +76,10 @@ void onProgress(int* current, int* target){
 
 int main()
 {
+    int sfd=-1;
     applicationTrunkHandler = onTrunkRequest;
     applicationProgressHandler = onProgress;
 
-    int sfd=-1;
     pRequest req = malloc(sizeof(Request));
     pResponse resp = malloc(sizeof(Response));
 

@@ -2,11 +2,12 @@
 // Created by sdutton on 29.11.22.
 //
 
+#include "IUpdaterCtr.h"
 #include "Connection.h"
+
 #include "Request.h"
 #include "Response.h"
-#include "Handler.h"
-
+#include "ServerHandler.h"
 #include <stdio.h>
 #include <netdb.h>
 #include <netinet/in.h>
@@ -23,6 +24,10 @@ int runStatus = 1;
 
 ApplicationProgressHandler applicationProgressHandler=0;
 ApplicationTrunkHandler applicationTrunkHandler=0;
+
+void onTrunkRequest(void* data){
+
+}
 
 int main()
 {
@@ -43,7 +48,7 @@ int main()
         printf("server accept failed...\n");
         exit(0);
     }
-
+    applicationTrunkHandler = onTrunkRequest;
     while(runStatus){
         read(sfd, req,sizeof(Request));
         callServerHandler(req,resp,applicationTrunkHandler);
