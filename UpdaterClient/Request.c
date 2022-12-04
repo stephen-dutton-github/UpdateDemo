@@ -30,7 +30,7 @@ int checkRequest(pRequest req){
     //Some hashing logic check
     return 1;
 }
-int sendRequest(int fd, pRequest request, void* response, void (*pgHandler)(int*,int*))
+int sendRequest(int fd, pRequest request, void* response, pStateBlock blk)
 {
     //write request to socket
 
@@ -42,8 +42,8 @@ int sendRequest(int fd, pRequest request, void* response, void (*pgHandler)(int*
     printf("Sending request...\n");
     while(pSizeRequest > progress) {
         progress += write(fd, request, pSizeRequest);
-        if(pgHandler != NULL) {
-            pgHandler(&progress, &pSizeRequest);
+        if(blk->progressHandler != NULL) {
+            blk->progressHandler(&progress, &pSizeRequest);
         }
     }
 

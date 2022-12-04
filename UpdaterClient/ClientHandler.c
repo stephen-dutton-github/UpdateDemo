@@ -24,9 +24,8 @@ void* onMessageResponse(pRequest req, pResponse resp);
 
 
 //Implementations
-void* callClientHandler(pRequest req, pResponse resp, void(*trunkCall)(void*))
+void* callClientHandler(pRequest req, pResponse resp, pStateBlock block)
 {
-    ApplicationTrunkHandler trunkHandler;
     CallRouter router;
     switch (resp->responseTo) {
         case WhatIsTheCurrentVersion:
@@ -35,7 +34,8 @@ void* callClientHandler(pRequest req, pResponse resp, void(*trunkCall)(void*))
 
         case Shutdown:
             router = onShutdownResponse;
-            trunkHandler(resp);
+            block->action = Shutdown;
+            block->trunkHandler(block);
             break;
 
         case Aux:
@@ -73,8 +73,6 @@ void* onVersionResponse(pRequest req, pResponse resp){
 
 void* onShutdownResponse(pRequest req, pResponse resp){
     printf("Closing down.\nClient will exit.\n");
-
-    //exit(0);
 }
 
 void* onMessageResponse(pRequest req, pResponse resp){

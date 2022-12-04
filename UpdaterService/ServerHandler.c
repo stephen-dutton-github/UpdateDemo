@@ -5,6 +5,7 @@
 #include <dlfcn.h>
 #include <stddef.h>
 #include <stdio.h>
+#include <string.h>
 #include "ClientHandler.h"
 #include "Request.h"
 #include "Response.h"
@@ -24,7 +25,7 @@ void* onMessageRequest(pRequest req, pResponse resp);
 
 
 //Implementations
-void* callServerHandler(pRequest req, pResponse resp, ApplicationTrunkHandler ath)
+void* callServerHandler(pRequest req, pResponse resp, pStateBlock block)
 {
     CallRouter router;
     switch (resp->responseTo) {
@@ -51,7 +52,12 @@ void* callServerHandler(pRequest req, pResponse resp, ApplicationTrunkHandler at
     }
     router(req,resp);
 }
-void* onVersionRequest(pRequest req, pResponse resp){};
+void* onVersionRequest(pRequest req, pResponse resp){
+    strcpy(resp->currentFunctionName, SYM_DEFAULT_NAME);
+    strcpy(resp->currentFunctionName, SYM_DEFAULT_NAME);
+    sprintf(resp->libPath, LIB_DEFAULT_PATH, req->version,req->version);
+
+};
 void* onShutdownRequest(pRequest req, pResponse resp){};
 void* onAuxiliaryRequest(pRequest req, pResponse resp){};
 void* onUpdateRequest(pRequest req, pResponse resp){};

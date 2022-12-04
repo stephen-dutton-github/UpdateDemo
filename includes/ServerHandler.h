@@ -6,6 +6,6 @@
 #ifndef UPDATEDEMO_SERVERHANDLER_H
 #define UPDATEDEMO_SERVERHANDLER_H
 
-void* callServerHandler(pRequest, pResponse, void(*)(void*));
+void* callServerHandler(pRequest, pResponse, pStateBlock);
 
 #endif //UPDATEDEMO_SERVERHANDLER_H

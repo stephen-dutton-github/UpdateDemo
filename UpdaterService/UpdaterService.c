@@ -4,7 +4,6 @@
 
 #include "IUpdaterCtr.h"
 #include "Connection.h"
-
 #include "Request.h"
 #include "Response.h"
 #include "ServerHandler.h"
@@ -22,10 +21,9 @@
 
 int runStatus = 1;
 
-ApplicationProgressHandler applicationProgressHandler=0;
-ApplicationTrunkHandler applicationTrunkHandler=0;
+pStateBlock block;
 
-void onTrunkRequest(void* data){
+void onTrunkRequest(pStateBlock blck){
 
 }
 
@@ -39,7 +37,8 @@ int main()
 
     pRequest req = malloc(sizeof(Request));
     pResponse resp = malloc(sizeof(Response));
-
+    block = malloc(sizeof(struct TrunkStateBlock));
+    block->trunkHandler = onTrunkRequest;
     sfd = initServerConnection(NULL);
 
     addressLen = sizeof(addressClient);
@@ -48,10 +47,10 @@ int main()
         printf("server accept failed...\n");
         exit(0);
     }
-    applicationTrunkHandler = onTrunkRequest;
+
     while(runStatus){
         read(sfd, req,sizeof(Request));
-        callServerHandler(req,resp,applicationTrunkHandler);
+        callServerHandler(req,resp,block);
     }
 
     printf("Server listening..\n");

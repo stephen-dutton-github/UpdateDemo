@@ -21,8 +21,7 @@
 
 volatile int runStatus = 1;
 
-ApplicationProgressHandler applicationProgressHandler;
-ApplicationTrunkHandler applicationTrunkHandler;
+pStateBlock sblock;
 
 int initClientConnection(void* data){
     int sfd;
@@ -63,7 +62,7 @@ void closeConnection(int fd){
     printf("server connection closed.. (and any other clear up)\n");
 }
 
-void onTrunkRequest(void*){
+void onTrunkRequest(pStateBlock block){
 
 }
 
@@ -77,11 +76,11 @@ void onProgress(int* current, int* target){
 int main()
 {
     int sfd=-1;
-    applicationTrunkHandler = onTrunkRequest;
-    applicationProgressHandler = onProgress;
-
     pRequest req = malloc(sizeof(Request));
     pResponse resp = malloc(sizeof(Response));
+    sblock = malloc(sizeof(struct TrunkStateBlock));
+    sblock->trunkHandler = onTrunkRequest;
+    sblock->progressHandler = onProgress;
 
     bzero(req,sizeof(Request));
     initRequest(req);
