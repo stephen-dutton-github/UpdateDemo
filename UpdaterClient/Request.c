@@ -21,6 +21,7 @@ void initRequest(pRequest req)
     sprintf(req->libPath, LIB_DEFAULT_PATH, req->version, req->version);
     printf("Enforce Default values for Demo Startup: %s; %s \n", req->libPath, req->symbolName);
 }
+
 void signRequest(pRequest req){
     //digest authentication on the struct
     bzero(req->stackCookie, sizeof(char) * STACK_COOKIE_LEN);
@@ -30,6 +31,7 @@ int checkRequest(pRequest req){
     //Some hashing logic check
     return 1;
 }
+
 int sendRequest(int fd, pRequest request, void* response, pStateBlock blk)
 {
     //write request to socket
@@ -40,7 +42,7 @@ int sendRequest(int fd, pRequest request, void* response, pStateBlock blk)
     bzero(response, pSizeResponse);
 
     printf("Sending request...\n");
-    while(pSizeRequest > progress) {
+    while(progress < pSizeRequest) {
         progress += write(fd, request, pSizeRequest);
         if(blk->progressHandler != NULL) {
             blk->progressHandler(&progress, &pSizeRequest);
@@ -49,12 +51,16 @@ int sendRequest(int fd, pRequest request, void* response, pStateBlock blk)
 
     printf("Await Response...\n");
     progress= lastValue =0;
-    while(pSizeResponse > progress) {
+    while(progress < pSizeResponse) {
         progress += lastValue = read(fd, request, pSizeResponse);
         if(lastValue != 0) {
-            if (pgHandler != NULL) {
-                pgHandler(&progress, &pSizeResponse);
+            if (blk->progressHandler != NULL) {
+                blk->progressHandler(&progress, &pSizeResponse);
             }
+        } else{
+            blk->action = DisplayMessage;
+            strcpy(blk->message,"Read Error in request Handler");
+            blk->trunkHandler(blk);
         }
     }
 
