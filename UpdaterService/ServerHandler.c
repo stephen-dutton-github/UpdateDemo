@@ -52,12 +52,14 @@ void* callServerHandler(pRequest req, pResponse resp, pStateBlock block)
     }
     router(req,resp);
 }
+
 void* onVersionRequest(pRequest req, pResponse resp){
     strcpy(resp->currentFunctionName, SYM_DEFAULT_NAME);
     strcpy(resp->currentFunctionName, SYM_DEFAULT_NAME);
     sprintf(resp->libPath, LIB_DEFAULT_PATH, req->version,req->version);
 
-};
+}
+
 void* onShutdownRequest(pRequest req, pResponse resp){};
 void* onAuxiliaryRequest(pRequest req, pResponse resp){};
 void* onUpdateRequest(pRequest req, pResponse resp){};

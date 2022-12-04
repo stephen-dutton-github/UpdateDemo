@@ -38,6 +38,7 @@ int main()
     pRequest req = malloc(sizeof(Request));
     pResponse resp = malloc(sizeof(Response));
     block = malloc(sizeof(struct TrunkStateBlock));
+
     block->trunkHandler = onTrunkRequest;
     sfd = initServerConnection(NULL);
 

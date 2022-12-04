@@ -22,7 +22,6 @@
 #define LIB_DEFAULT_PATH "../messageV%u/libmessageV%u.so"
 #define SYM_DEFAULT_NAME "getVersionMessage"
 
-
 typedef enum {REQUEST=0,RESPONSE=1} Envelope;
 typedef enum {V1=1,V2=2,V3=3} Version;
 typedef enum {WhatIsTheCurrentVersion, Update, Shutdown, DisplayMessage, Aux } Action;
