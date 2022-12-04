@@ -21,19 +21,15 @@ void initRequest(pRequest req)
     sprintf(req->libPath, LIB_DEFAULT_PATH, req->version, req->version);
     printf("Enforce Default values for Demo Startup: %s; %s \n", req->libPath, req->symbolName);
 }
-
-
 void signRequest(pRequest req){
     //digest authentication on the struct
     bzero(req->stackCookie, sizeof(char) * STACK_COOKIE_LEN);
     strcpy(req->stackCookie,STACK_COOKIE_FAKE);
 }
-
 int checkRequest(pRequest req){
     //Some hashing logic check
     return 1;
 }
-
 int sendRequest(int fd, pRequest request, void* response, void (*pgHandler)(int*,int*))
 {
     //write request to socket
@@ -62,7 +58,5 @@ int sendRequest(int fd, pRequest request, void* response, void (*pgHandler)(int*
         }
     }
 
-    while
-    read(fd, response, pSizeResponse);
     return 0;
 }
