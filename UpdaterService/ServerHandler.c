@@ -54,10 +54,10 @@ void* callServerHandler(pRequest req, pResponse resp, pStateBlock block)
 }
 
 void* onVersionRequest(pRequest req, pResponse resp, pStateBlock block){
-    strcpy(resp->currentFunctionName, SYM_DEFAULT_NAME);
-    strcpy(resp->currentFunctionName, SYM_DEFAULT_NAME);
-    sprintf(resp->libPath, block->path, block->version,req->version);
-
+    strcpy(resp->currentFunctionName, block->symbolName);
+    strcpy(resp->libPath,block->path);
+    resp->version = block->version;
+    resp->responseTo = block->action;
 }
 
 void* onShutdownRequest(pRequest req, pResponse resp, pStateBlock block){};

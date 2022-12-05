@@ -25,15 +25,17 @@ void initServerStateModel(pStateBlock);
 
 
 void onTrunkRequest(pStateBlock blck){
-
+    switch (blck->action) {
+        case Shutdown:
+            runStatus = 0;
+            break;
+    }
 }
 
 
 
 int main()
 {
-
-
     struct sockaddr_in addressLocal, addressClient;
     socklen_t addressLen;
     int cfd=0;  //Connection file descriptor
@@ -45,21 +47,23 @@ int main()
 
     block->trunkHandler = onTrunkRequest;
     sfd = initServerConnection(NULL);
-
     addressLen = sizeof(addressClient);
-    cfd = accept(sfd, (SA*)&addressClient, &addressLen);
-    if (cfd < 0) {
-        printf("server accept failed...\n");
-        exit(0);
-    }
 
     while(runStatus){
+        cfd = accept(sfd, (SA*)&addressClient, &addressLen);
+        if (cfd < 0) {
+            printf("server accept failed...\n");
+            exit(0);
+        }
+        printf("Request received...\n");
         read(sfd, req,sizeof(Request));
         callServerHandler(req,resp,block);
+        write(cfd,resp,sizeof(Response));
+        close(cfd);
     }
 
-    printf("Server listening..\n");
     closeConnection(sfd);
+    printf("Server Exit...\n");
 }
 
 void closeConnection(int fd){
