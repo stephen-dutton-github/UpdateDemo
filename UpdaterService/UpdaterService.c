@@ -20,15 +20,19 @@
 #define SA struct sockaddr
 
 int runStatus = 1;
-
 pStateBlock block;
+void initServerStateModel(pStateBlock);
+
 
 void onTrunkRequest(pStateBlock blck){
 
 }
 
+
+
 int main()
 {
+
 
     struct sockaddr_in addressLocal, addressClient;
     socklen_t addressLen;
@@ -92,3 +96,11 @@ int initServerConnection(int* pConnectionFileDesc){
 
     return sfd;
 }
+
+void initServerStateModel(pStateBlock pSBlock){
+    pSBlock->version = V1;
+    sprintf(pSBlock->path, LIB_DEFAULT_PATH,V1,V1);
+    sprintf(pSBlock->symbolName, SYM_DEFAULT_NAME);
+    pSBlock->trunkHandler = onTrunkRequest;
+    pSBlock->action = WhatIsTheCurrentVersion;
+};

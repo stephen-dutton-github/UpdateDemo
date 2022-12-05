@@ -18,7 +18,7 @@
 ///TODO: Supply Hashing Function
 #define STACK_COOKIE_FAKE "59c35cf155a17f850a160956e13ecdb4be6a500"
 
-///TODO: Create
+///TODO: Create running state model
 #define LIB_DEFAULT_PATH "../messageV%u/libmessageV%u.so"
 #define SYM_DEFAULT_NAME "getVersionMessage"
 
@@ -28,6 +28,7 @@ typedef enum {WhatIsTheCurrentVersion, Update, Shutdown, DisplayMessage, Aux } A
 typedef enum {SUCCESS, FAILURE} Status;
 
 typedef struct TrunkStateBlock{
+    Version version;
     Action action;
     char* path;
     char* symbolName;

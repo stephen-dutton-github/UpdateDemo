@@ -13,14 +13,14 @@
 // dlopen, dlsym, dlclose
 
 //handler event delegate
-typedef void* (*CallRouter)(pRequest,pResponse) ;
+typedef void* (*CallRouter)(pRequest,pResponse,pStateBlock block) ;
 
 //Prototypes
-void* onVersionRequest(pRequest req, pResponse resp);
-void* onShutdownRequest(pRequest req, pResponse resp);
-void* onAuxiliaryRequest(pRequest req, pResponse resp);
-void* onUpdateRequest(pRequest req, pResponse resp);
-void* onMessageRequest(pRequest req, pResponse resp);
+void* onVersionRequest(pRequest req, pResponse resp, pStateBlock block);
+void* onShutdownRequest(pRequest req, pResponse resp, pStateBlock block);
+void* onAuxiliaryRequest(pRequest req, pResponse resp, pStateBlock block);
+void* onUpdateRequest(pRequest req, pResponse resp, pStateBlock block);
+void* onMessageRequest(pRequest req, pResponse resp, pStateBlock block);
 
 
 
@@ -50,17 +50,17 @@ void* callServerHandler(pRequest req, pResponse resp, pStateBlock block)
             break;
 
     }
-    router(req,resp);
+    router(req,resp,block);
 }
 
-void* onVersionRequest(pRequest req, pResponse resp){
+void* onVersionRequest(pRequest req, pResponse resp, pStateBlock block){
     strcpy(resp->currentFunctionName, SYM_DEFAULT_NAME);
     strcpy(resp->currentFunctionName, SYM_DEFAULT_NAME);
-    sprintf(resp->libPath, LIB_DEFAULT_PATH, req->version,req->version);
+    sprintf(resp->libPath, block->path, block->version,req->version);
 
 }
 
-void* onShutdownRequest(pRequest req, pResponse resp){};
-void* onAuxiliaryRequest(pRequest req, pResponse resp){};
-void* onUpdateRequest(pRequest req, pResponse resp){};
-void* onMessageRequest(pRequest req, pResponse resp){};
+void* onShutdownRequest(pRequest req, pResponse resp, pStateBlock block){};
+void* onAuxiliaryRequest(pRequest req, pResponse resp, pStateBlock block){};
+void* onUpdateRequest(pRequest req, pResponse resp, pStateBlock block){};
+void* onMessageRequest(pRequest req, pResponse resp, pStateBlock block){};
