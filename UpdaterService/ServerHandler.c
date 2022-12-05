@@ -54,13 +54,24 @@ void* callServerHandler(pRequest req, pResponse resp, pStateBlock block)
 }
 
 void* onVersionRequest(pRequest req, pResponse resp, pStateBlock block){
+    ///TODO: set up response indicating what the values of the server block are
     strcpy(resp->currentFunctionName, block->symbolName);
     strcpy(resp->libPath,block->path);
     resp->version = block->version;
     resp->responseTo = block->action;
 }
 
-void* onShutdownRequest(pRequest req, pResponse resp, pStateBlock block){};
-void* onAuxiliaryRequest(pRequest req, pResponse resp, pStateBlock block){};
-void* onUpdateRequest(pRequest req, pResponse resp, pStateBlock block){};
-void* onMessageRequest(pRequest req, pResponse resp, pStateBlock block){};
+void* onShutdownRequest(pRequest req, pResponse resp, pStateBlock block){
+    block->trunkHandler(block);
+};
+void* onAuxiliaryRequest(pRequest req, pResponse resp, pStateBlock block){
+
+    block->trunkHandler(block);
+};
+void* onUpdateRequest(pRequest req, pResponse resp, pStateBlock block){
+    ///TODO: Set up response to say that the block has been updated with new values
+
+};
+void* onMessageRequest(pRequest req, pResponse resp, pStateBlock block){
+    block->trunkHandler(block);
+};
