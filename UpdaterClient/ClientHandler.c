@@ -49,8 +49,8 @@ void* callHandler(pRequest req, pResponse resp, pStateBlock block)
         case DisplayMessage:
             router = onMessageResponse;
             break;
-
     }
+
     router(req,resp);
 }
 
@@ -67,7 +67,7 @@ void* onVersionResponse(pRequest req, pResponse resp){
 
     //risky on main thread... let's crash the client
     char * restrict theMessage = versionMessageHandler(data);
-    printf("Message version received from server: %s \n", theMessage);
+    printf("Message version received from server: %s \r", theMessage);
     dlclose(hLib);
 }
 

@@ -20,7 +20,7 @@ typedef struct Requests{
 
 void initRequest(pRequest);
 void signRequest(pRequest);
-int sendRequest(int,pRequest,void*,pStateBlock);
+int sendRequest(int,pRequest,void*);
 int checkRequest(pRequest);
 
 

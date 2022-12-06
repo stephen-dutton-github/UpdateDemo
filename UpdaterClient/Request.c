@@ -32,7 +32,7 @@ int checkRequest(pRequest req){
     return 1;
 }
 
-int sendRequest(int fd, pRequest request, void* response, pStateBlock blk) {
+int sendRequest(int fd, pRequest request, void* response) {
     //write request to socket
 
     int lastValue = 0;
@@ -42,7 +42,7 @@ int sendRequest(int fd, pRequest request, void* response, pStateBlock blk) {
     lastValue = write(fd,request, sizeof(Request));
     if(lastValue < 0){
         printf("Error sending the packet\n");
-        exit(-1);
+        return -1;
     }
 
     lastValue = read(fd, response, sizeof(Response));
@@ -50,7 +50,7 @@ int sendRequest(int fd, pRequest request, void* response, pStateBlock blk) {
 
     if(lastValue < 0){
         printf("Error reading the packet\n");
-        exit(-1);
+        return -1;
     }
 
     return 0;

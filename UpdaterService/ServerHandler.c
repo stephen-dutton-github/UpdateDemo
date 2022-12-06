@@ -32,6 +32,10 @@ void* callHandler(pRequest req, pResponse resp, pStateBlock block)
             break;
 
         case Shutdown:
+            router = onAuxiliaryRequest;
+            break;
+
+        case ShutDownServer:
             router = onShutdownRequest;
             break;
 
@@ -60,10 +64,19 @@ void* onVersionRequest(pRequest req, pResponse resp, pStateBlock block){
 }
 
 void* onShutdownRequest(pRequest req, pResponse resp, pStateBlock block){
+    ///TODO: Think of some imaginary task domain
+    if(req->cmd == Shutdown){
+        printf("Full shutdown, server process ending...");
+    }
+
     block->trunkHandler(block);
 };
 void* onAuxiliaryRequest(pRequest req, pResponse resp, pStateBlock block){
     ///TODO: Think of some imaginary task domain
+    if(req->cmd == Shutdown){
+        printf("Client shutdown, server remaining up...");
+    }
+
     block->trunkHandler(block);
 };
 void* onUpdateRequest(pRequest req, pResponse resp, pStateBlock block){
