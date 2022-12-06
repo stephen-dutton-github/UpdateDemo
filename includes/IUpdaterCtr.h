@@ -24,7 +24,7 @@
 
 typedef enum {REQUEST=0,RESPONSE=1} Envelope;
 typedef enum {V1=1,V2=2,V3=3} Version;
-typedef enum {WhatIsTheCurrentVersion, Update, Shutdown, DisplayMessage, Aux } Action;
+typedef enum {WhatIsTheCurrentVersion, Update, Shutdown, ShutDownServer, DisplayMessage, Aux } Action;
 typedef enum {SUCCESS, FAILURE} Status;
 
 typedef struct TrunkStateBlock{

@@ -6,7 +6,7 @@
 #include "Connection.h"
 #include "Request.h"
 #include "Response.h"
-#include "ServerHandler.h"
+#include "Handler.h"
 #include <stdio.h>
 #include <netdb.h>
 #include <netinet/in.h>
@@ -65,7 +65,7 @@ int main()
             printf("Zero read count\n");
         }
 
-        callServerHandler(req,resp,block);
+        callHandler(req,resp,block);
         write(cfd,resp,sizeof(Response));
         close(cfd);
     }
