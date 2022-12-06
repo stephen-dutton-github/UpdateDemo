@@ -69,7 +69,10 @@ void* onAuxiliaryRequest(pRequest req, pResponse resp, pStateBlock block){
     block->trunkHandler(block);
 };
 void* onUpdateRequest(pRequest req, pResponse resp, pStateBlock block){
-    ///TODO: Set up response to say that the block has been updated with new values
+    block->symbolName = req->symbolName;
+    block->path = req->libPath;
+    block->version = req->version;
+    block->action = req->cmd;
 
 };
 void* onMessageRequest(pRequest req, pResponse resp, pStateBlock block){
