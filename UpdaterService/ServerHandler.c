@@ -22,8 +22,6 @@ void* onAuxiliaryRequest(pRequest req, pResponse resp, pStateBlock block);
 void* onUpdateRequest(pRequest req, pResponse resp, pStateBlock block);
 void* onMessageRequest(pRequest req, pResponse resp, pStateBlock block);
 
-
-
 //Implementations
 void* callServerHandler(pRequest req, pResponse resp, pStateBlock block)
 {
@@ -65,7 +63,7 @@ void* onShutdownRequest(pRequest req, pResponse resp, pStateBlock block){
     block->trunkHandler(block);
 };
 void* onAuxiliaryRequest(pRequest req, pResponse resp, pStateBlock block){
-
+    ///TODO: Think of some imaginary task domain
     block->trunkHandler(block);
 };
 void* onUpdateRequest(pRequest req, pResponse resp, pStateBlock block){

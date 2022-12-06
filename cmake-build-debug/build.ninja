@@ -84,8 +84,6 @@ build messageV1/CMakeFiles/messageV1.dir/MessageV1.c.o: C_COMPILER__messageV1_De
   INCLUDES = -I/home/sdutton/CLionProjects/UpdateDemo/messageV1/../includes
   OBJECT_DIR = messageV1/CMakeFiles/messageV1.dir
   OBJECT_FILE_DIR = messageV1/CMakeFiles/messageV1.dir
-  TARGET_COMPILE_PDB = messageV1/CMakeFiles/messageV1.dir/
-  TARGET_PDB = messageV1/libmessageV1.pdb
 
 
 # =============================================================================
@@ -102,9 +100,8 @@ build messageV1/libmessageV1.so: C_SHARED_LIBRARY_LINKER__messageV1_Debug messag
   PRE_LINK = :
   SONAME = libmessageV1.so
   SONAME_FLAG = -Wl,-soname,
-  TARGET_COMPILE_PDB = messageV1/CMakeFiles/messageV1.dir/
   TARGET_FILE = messageV1/libmessageV1.so
-  TARGET_PDB = messageV1/libmessageV1.pdb
+  TARGET_PDB = messageV1.so.dbg
 
 
 #############################################
@@ -150,8 +147,6 @@ build messageV2/CMakeFiles/messageV2.dir/MessageV2.c.o: C_COMPILER__messageV2_De
   INCLUDES = -I/home/sdutton/CLionProjects/UpdateDemo/messageV2/../includes
   OBJECT_DIR = messageV2/CMakeFiles/messageV2.dir
   OBJECT_FILE_DIR = messageV2/CMakeFiles/messageV2.dir
-  TARGET_COMPILE_PDB = messageV2/CMakeFiles/messageV2.dir/
-  TARGET_PDB = messageV2/libmessageV2.pdb
 
 
 # =============================================================================
@@ -168,9 +163,8 @@ build messageV2/libmessageV2.so: C_SHARED_LIBRARY_LINKER__messageV2_Debug messag
   PRE_LINK = :
   SONAME = libmessageV2.so
   SONAME_FLAG = -Wl,-soname,
-  TARGET_COMPILE_PDB = messageV2/CMakeFiles/messageV2.dir/
   TARGET_FILE = messageV2/libmessageV2.so
-  TARGET_PDB = messageV2/libmessageV2.pdb
+  TARGET_PDB = messageV2.so.dbg
 
 
 #############################################
@@ -215,8 +209,6 @@ build UpdaterClient/CMakeFiles/UpdaterClient.dir/UpdaterClient.c.o: C_COMPILER__
   INCLUDES = -I/home/sdutton/CLionProjects/UpdateDemo/UpdaterClient/../includes
   OBJECT_DIR = UpdaterClient/CMakeFiles/UpdaterClient.dir
   OBJECT_FILE_DIR = UpdaterClient/CMakeFiles/UpdaterClient.dir
-  TARGET_COMPILE_PDB = UpdaterClient/CMakeFiles/UpdaterClient.dir/
-  TARGET_PDB = UpdaterClient/UpdaterClient.pdb
 
 build UpdaterClient/CMakeFiles/UpdaterClient.dir/ClientHandler.c.o: C_COMPILER__UpdaterClient_Debug /home/sdutton/CLionProjects/UpdateDemo/UpdaterClient/ClientHandler.c || cmake_object_order_depends_target_UpdaterClient
   DEP_FILE = UpdaterClient/CMakeFiles/UpdaterClient.dir/ClientHandler.c.o.d
@@ -224,8 +216,6 @@ build UpdaterClient/CMakeFiles/UpdaterClient.dir/ClientHandler.c.o: C_COMPILER__
   INCLUDES = -I/home/sdutton/CLionProjects/UpdateDemo/UpdaterClient/../includes
   OBJECT_DIR = UpdaterClient/CMakeFiles/UpdaterClient.dir
   OBJECT_FILE_DIR = UpdaterClient/CMakeFiles/UpdaterClient.dir
-  TARGET_COMPILE_PDB = UpdaterClient/CMakeFiles/UpdaterClient.dir/
-  TARGET_PDB = UpdaterClient/UpdaterClient.pdb
 
 build UpdaterClient/CMakeFiles/UpdaterClient.dir/Request.c.o: C_COMPILER__UpdaterClient_Debug /home/sdutton/CLionProjects/UpdateDemo/UpdaterClient/Request.c || cmake_object_order_depends_target_UpdaterClient
   DEP_FILE = UpdaterClient/CMakeFiles/UpdaterClient.dir/Request.c.o.d
@@ -233,8 +223,6 @@ build UpdaterClient/CMakeFiles/UpdaterClient.dir/Request.c.o: C_COMPILER__Update
   INCLUDES = -I/home/sdutton/CLionProjects/UpdateDemo/UpdaterClient/../includes
   OBJECT_DIR = UpdaterClient/CMakeFiles/UpdaterClient.dir
   OBJECT_FILE_DIR = UpdaterClient/CMakeFiles/UpdaterClient.dir
-  TARGET_COMPILE_PDB = UpdaterClient/CMakeFiles/UpdaterClient.dir/
-  TARGET_PDB = UpdaterClient/UpdaterClient.pdb
 
 
 # =============================================================================
@@ -249,9 +237,8 @@ build UpdaterClient/UpdaterClient: C_EXECUTABLE_LINKER__UpdaterClient_Debug Upda
   OBJECT_DIR = UpdaterClient/CMakeFiles/UpdaterClient.dir
   POST_BUILD = :
   PRE_LINK = :
-  TARGET_COMPILE_PDB = UpdaterClient/CMakeFiles/UpdaterClient.dir/
   TARGET_FILE = UpdaterClient/UpdaterClient
-  TARGET_PDB = UpdaterClient/UpdaterClient.pdb
+  TARGET_PDB = UpdaterClient.dbg
 
 
 #############################################
@@ -296,8 +283,6 @@ build UpdaterService/CMakeFiles/UpdaterService.dir/UpdaterService.c.o: C_COMPILE
   INCLUDES = -I/home/sdutton/CLionProjects/UpdateDemo/UpdaterService/../includes
   OBJECT_DIR = UpdaterService/CMakeFiles/UpdaterService.dir
   OBJECT_FILE_DIR = UpdaterService/CMakeFiles/UpdaterService.dir
-  TARGET_COMPILE_PDB = UpdaterService/CMakeFiles/UpdaterService.dir/
-  TARGET_PDB = UpdaterService/UpdaterService.pdb
 
 build UpdaterService/CMakeFiles/UpdaterService.dir/Response.c.o: C_COMPILER__UpdaterService_Debug /home/sdutton/CLionProjects/UpdateDemo/UpdaterService/Response.c || cmake_object_order_depends_target_UpdaterService
   DEP_FILE = UpdaterService/CMakeFiles/UpdaterService.dir/Response.c.o.d
@@ -305,8 +290,6 @@ build UpdaterService/CMakeFiles/UpdaterService.dir/Response.c.o: C_COMPILER__Upd
   INCLUDES = -I/home/sdutton/CLionProjects/UpdateDemo/UpdaterService/../includes
   OBJECT_DIR = UpdaterService/CMakeFiles/UpdaterService.dir
   OBJECT_FILE_DIR = UpdaterService/CMakeFiles/UpdaterService.dir
-  TARGET_COMPILE_PDB = UpdaterService/CMakeFiles/UpdaterService.dir/
-  TARGET_PDB = UpdaterService/UpdaterService.pdb
 
 build UpdaterService/CMakeFiles/UpdaterService.dir/ServerHandler.c.o: C_COMPILER__UpdaterService_Debug /home/sdutton/CLionProjects/UpdateDemo/UpdaterService/ServerHandler.c || cmake_object_order_depends_target_UpdaterService
   DEP_FILE = UpdaterService/CMakeFiles/UpdaterService.dir/ServerHandler.c.o.d
@@ -314,8 +297,6 @@ build UpdaterService/CMakeFiles/UpdaterService.dir/ServerHandler.c.o: C_COMPILER
   INCLUDES = -I/home/sdutton/CLionProjects/UpdateDemo/UpdaterService/../includes
   OBJECT_DIR = UpdaterService/CMakeFiles/UpdaterService.dir
   OBJECT_FILE_DIR = UpdaterService/CMakeFiles/UpdaterService.dir
-  TARGET_COMPILE_PDB = UpdaterService/CMakeFiles/UpdaterService.dir/
-  TARGET_PDB = UpdaterService/UpdaterService.pdb
 
 
 # =============================================================================
@@ -330,9 +311,8 @@ build UpdaterService/UpdaterService: C_EXECUTABLE_LINKER__UpdaterService_Debug U
   OBJECT_DIR = UpdaterService/CMakeFiles/UpdaterService.dir
   POST_BUILD = :
   PRE_LINK = :
-  TARGET_COMPILE_PDB = UpdaterService/CMakeFiles/UpdaterService.dir/
   TARGET_FILE = UpdaterService/UpdaterService
-  TARGET_PDB = UpdaterService/UpdaterService.pdb
+  TARGET_PDB = UpdaterService.dbg
 
 
 #############################################
@@ -417,14 +397,14 @@ build messageV2/all: phony messageV2/libmessageV2.so
 #############################################
 # Re-run CMake if any of its inputs changed.
 
-build build.ninja: RERUN_CMAKE | /home/sdutton/CLionProjects/UpdateDemo/CMakeLists.txt /home/sdutton/CLionProjects/UpdateDemo/UpdaterClient/CMakeLists.txt /home/sdutton/CLionProjects/UpdateDemo/UpdaterService/CMakeLists.txt /home/sdutton/CLionProjects/UpdateDemo/messageV1/CMakeLists.txt /home/sdutton/CLionProjects/UpdateDemo/messageV2/CMakeLists.txt /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/CMakeCCompiler.cmake.in /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/CMakeCCompilerABI.c /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/CMakeCInformation.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/CMakeCommonLanguageInclude.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/CMakeCompilerIdDetection.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/CMakeDetermineCCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/CMakeDetermineCompileFeatures.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/CMakeDetermineCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/CMakeDetermineCompilerABI.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/CMakeDetermineCompilerId.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/CMakeDetermineSystem.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/CMakeFindBinUtils.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/CMakeGenericSystem.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/CMakeInitializeConfigs.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/CMakeLanguageInformation.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/CMakeParseImplicitIncludeInfo.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/CMakeParseImplicitLinkInfo.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/CMakeParseLibraryArchitecture.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/CMakeSystem.cmake.in /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/CMakeSystemSpecificInformation.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/CMakeSystemSpecificInitialize.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/CMakeTestCCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/CMakeTestCompilerCommon.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/ADSP-DetermineCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/ARMCC-DetermineCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/ARMClang-DetermineCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/AppleClang-DetermineCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/Borland-DetermineCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/Bruce-C-DetermineCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/CMakeCommonCompilerMacros.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/Clang-DetermineCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/Clang-DetermineCompilerInternal.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/Compaq-C-DetermineCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/Cray-DetermineCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/Embarcadero-DetermineCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/Fujitsu-DetermineCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/FujitsuClang-DetermineCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/GHS-DetermineCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/GNU-C-DetermineCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/GNU-C.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/GNU-FindBinUtils.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/GNU.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/HP-C-DetermineCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/IAR-DetermineCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/IBMCPP-C-DetermineVersionInternal.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/IBMClang-C-DetermineCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/Intel-DetermineCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/IntelLLVM-DetermineCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/LCC-C-DetermineCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/MSVC-DetermineCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/NVHPC-DetermineCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/NVIDIA-DetermineCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/OpenWatcom-DetermineCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/PGI-DetermineCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/PathScale-DetermineCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/SCO-DetermineCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/SDCC-C-DetermineCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/SunPro-C-DetermineCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/TI-DetermineCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/TinyCC-C-DetermineCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/VisualAge-C-DetermineCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/Watcom-DetermineCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/XL-C-DetermineCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/XLClang-C-DetermineCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/zOS-C-DetermineCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Internal/FeatureTesting.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Platform/Linux-GNU-C.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Platform/Linux-GNU.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Platform/Linux.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.24.2/CMakeCCompiler.cmake CMakeFiles/3.24.2/CMakeSystem.cmake
+build build.ninja: RERUN_CMAKE | /home/sdutton/CLionProjects/UpdateDemo/CMakeLists.txt /home/sdutton/CLionProjects/UpdateDemo/UpdaterClient/CMakeLists.txt /home/sdutton/CLionProjects/UpdateDemo/UpdaterService/CMakeLists.txt /home/sdutton/CLionProjects/UpdateDemo/messageV1/CMakeLists.txt /home/sdutton/CLionProjects/UpdateDemo/messageV2/CMakeLists.txt /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/CMakeCInformation.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/CMakeCommonLanguageInclude.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/CMakeGenericSystem.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/CMakeInitializeConfigs.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/CMakeLanguageInformation.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/CMakeSystemSpecificInformation.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/CMakeSystemSpecificInitialize.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/CMakeCommonCompilerMacros.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/GNU-C.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/GNU.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Platform/Linux-GNU-C.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Platform/Linux-GNU.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Platform/Linux.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.24.2/CMakeCCompiler.cmake CMakeFiles/3.24.2/CMakeSystem.cmake
   pool = console
 
 
 #############################################
 # A missing CMake input file is not an error.
 
-build /home/sdutton/CLionProjects/UpdateDemo/CMakeLists.txt /home/sdutton/CLionProjects/UpdateDemo/UpdaterClient/CMakeLists.txt /home/sdutton/CLionProjects/UpdateDemo/UpdaterService/CMakeLists.txt /home/sdutton/CLionProjects/UpdateDemo/messageV1/CMakeLists.txt /home/sdutton/CLionProjects/UpdateDemo/messageV2/CMakeLists.txt /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/CMakeCCompiler.cmake.in /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/CMakeCCompilerABI.c /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/CMakeCInformation.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/CMakeCommonLanguageInclude.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/CMakeCompilerIdDetection.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/CMakeDetermineCCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/CMakeDetermineCompileFeatures.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/CMakeDetermineCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/CMakeDetermineCompilerABI.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/CMakeDetermineCompilerId.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/CMakeDetermineSystem.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/CMakeFindBinUtils.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/CMakeGenericSystem.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/CMakeInitializeConfigs.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/CMakeLanguageInformation.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/CMakeParseImplicitIncludeInfo.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/CMakeParseImplicitLinkInfo.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/CMakeParseLibraryArchitecture.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/CMakeSystem.cmake.in /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/CMakeSystemSpecificInformation.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/CMakeSystemSpecificInitialize.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/CMakeTestCCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/CMakeTestCompilerCommon.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/ADSP-DetermineCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/ARMCC-DetermineCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/ARMClang-DetermineCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/AppleClang-DetermineCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/Borland-DetermineCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/Bruce-C-DetermineCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/CMakeCommonCompilerMacros.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/Clang-DetermineCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/Clang-DetermineCompilerInternal.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/Compaq-C-DetermineCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/Cray-DetermineCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/Embarcadero-DetermineCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/Fujitsu-DetermineCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/FujitsuClang-DetermineCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/GHS-DetermineCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/GNU-C-DetermineCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/GNU-C.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/GNU-FindBinUtils.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/GNU.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/HP-C-DetermineCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/IAR-DetermineCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/IBMCPP-C-DetermineVersionInternal.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/IBMClang-C-DetermineCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/Intel-DetermineCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/IntelLLVM-DetermineCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/LCC-C-DetermineCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/MSVC-DetermineCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/NVHPC-DetermineCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/NVIDIA-DetermineCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/OpenWatcom-DetermineCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/PGI-DetermineCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/PathScale-DetermineCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/SCO-DetermineCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/SDCC-C-DetermineCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/SunPro-C-DetermineCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/TI-DetermineCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/TinyCC-C-DetermineCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/VisualAge-C-DetermineCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/Watcom-DetermineCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/XL-C-DetermineCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/XLClang-C-DetermineCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/zOS-C-DetermineCompiler.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Internal/FeatureTesting.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Platform/Linux-GNU-C.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Platform/Linux-GNU.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Platform/Linux.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.24.2/CMakeCCompiler.cmake CMakeFiles/3.24.2/CMakeSystem.cmake: phony
+build /home/sdutton/CLionProjects/UpdateDemo/CMakeLists.txt /home/sdutton/CLionProjects/UpdateDemo/UpdaterClient/CMakeLists.txt /home/sdutton/CLionProjects/UpdateDemo/UpdaterService/CMakeLists.txt /home/sdutton/CLionProjects/UpdateDemo/messageV1/CMakeLists.txt /home/sdutton/CLionProjects/UpdateDemo/messageV2/CMakeLists.txt /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/CMakeCInformation.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/CMakeCommonLanguageInclude.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/CMakeGenericSystem.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/CMakeInitializeConfigs.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/CMakeLanguageInformation.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/CMakeSystemSpecificInformation.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/CMakeSystemSpecificInitialize.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/CMakeCommonCompilerMacros.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/GNU-C.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Compiler/GNU.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Platform/Linux-GNU-C.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Platform/Linux-GNU.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Platform/Linux.cmake /snap/clion/218/bin/cmake/linux/share/cmake-3.24/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.24.2/CMakeCCompiler.cmake CMakeFiles/3.24.2/CMakeSystem.cmake: phony
 
 
 #############################################

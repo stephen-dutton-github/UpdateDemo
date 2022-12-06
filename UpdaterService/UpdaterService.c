@@ -40,7 +40,8 @@ int main()
     socklen_t addressLen;
     int cfd=0;  //Connection file descriptor
     int sfd=0;  //socket file descriptor
-
+    int rct = 0; //read count
+    int msgLen = 0;
     pRequest req = malloc(sizeof(Request));
     pResponse resp = malloc(sizeof(Response));
     block = malloc(sizeof(struct TrunkStateBlock));
@@ -48,6 +49,8 @@ int main()
     block->trunkHandler = onTrunkRequest;
     sfd = initServerConnection(NULL);
     addressLen = sizeof(addressClient);
+    initServerStateModel(block);
+    //initResponse(resp);
 
     while(runStatus){
         cfd = accept(sfd, (SA*)&addressClient, &addressLen);
@@ -56,7 +59,12 @@ int main()
             exit(0);
         }
         printf("Request received...\n");
-        read(sfd, req,sizeof(Request));
+        rct = read(cfd, req,sizeof(Request));
+
+        if(rct < 1){
+            printf("Zero read count\n");
+        }
+
         callServerHandler(req,resp,block);
         write(cfd,resp,sizeof(Response));
         close(cfd);

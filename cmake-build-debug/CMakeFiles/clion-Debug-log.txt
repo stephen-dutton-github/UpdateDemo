@@ -1,10 +1,4 @@
-/snap/clion/218/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" -S /home/sdutton/CLionProjects/UpdateDemo -B /home/sdutton/CLionProjects/UpdateDemo/cmake-build-debug
-CMake Warning (dev) at messageV1/CMakeLists.txt:6:
-  Syntax Warning in cmake code at column 113
-
-  Argument not separated from preceding token by whitespace.
-This warning is for project developers.  Use -Wno-dev to suppress it.
-
+/snap/clion/218/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/snap/clion/218/bin/ninja/linux/ninja -G Ninja -S /home/sdutton/CLionProjects/UpdateDemo -B /home/sdutton/CLionProjects/UpdateDemo/cmake-build-debug
 -- Configuring done
 -- Generating done
 -- Build files have been written to: /home/sdutton/CLionProjects/UpdateDemo/cmake-build-debug
