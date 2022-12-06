@@ -42,18 +42,14 @@ int initClientConnection(void* data){
 
     int retry = 0;
     int server = 0;
-    do {
-        if (connect(sfd, (SA *) &serverAddress, sizeof(serverAddress)) != 0)
-        {
-            printf("Connection failed... \nTrying to start server...\n Please Wait..\n");
-            server = system(SERVER_EXE);
-            retry++;
-            sleep(1);
-        } else{
-            break;
-        }
-    } while (retry < 2);
+
+    if (connect(sfd, (SA *) &serverAddress, sizeof(serverAddress)) != 0)
+    {
+        printf("Connection failed... \nTrying to start server...\n Please Wait..\n");
+        exit(-1);
+    }
     printf("connected to the server..\n");
+
     return sfd;
 }
 
@@ -85,9 +81,10 @@ int main()
     bzero(req,sizeof(Request));
     initRequest(req);
     signRequest(req);
-    sfd = initClientConnection(NULL);
+
 
     while(runStatus){
+        sfd = initClientConnection(NULL);
         runStatus = sendRequest(sfd, req, resp, sblock);
         callClientHandler(req, resp, sblock);
     }

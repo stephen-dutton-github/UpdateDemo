@@ -32,36 +32,25 @@ int checkRequest(pRequest req){
     return 1;
 }
 
-int sendRequest(int fd, pRequest request, void* response, pStateBlock blk)
-{
+int sendRequest(int fd, pRequest request, void* response, pStateBlock blk) {
     //write request to socket
 
-    int pSizeRequest = sizeof(Request);
-    int pSizeResponse = sizeof(Response);
-    int progress = 0, lastValue;
-    bzero(response, pSizeResponse);
+    int lastValue = 0;
+    bzero(response, sizeof(Response));
 
     printf("Sending request...\n");
-    while(progress < pSizeRequest) {
-        progress += write(fd, request, pSizeRequest);
-        if(blk->progressHandler != NULL) {
-            blk->progressHandler(&progress, &pSizeRequest);
-        }
+    lastValue = write(fd,request, sizeof(Request));
+    if(lastValue < 0){
+        printf("Error sending the packet\n");
+        exit(-1);
     }
 
-    printf("Await Response...\n");
-    progress= lastValue =0;
-    while(progress < pSizeResponse) {
-        progress += lastValue = read(fd, request, pSizeResponse);
-        if(lastValue != 0) {
-            if (blk->progressHandler != NULL) {
-                blk->progressHandler(&progress, &pSizeResponse);
-            }
-        } else{
-            blk->action = DisplayMessage;
-            blk->message = "Read Error in request Handler";
-            blk->trunkHandler(blk);
-        }
+    lastValue = read(fd, response, sizeof(Response));
+    printf("Response received...\n");
+
+    if(lastValue < 0){
+        printf("Error reading the packet\n");
+        exit(-1);
     }
 
     return 0;

@@ -50,7 +50,7 @@ int main()
     sfd = initServerConnection(NULL);
     addressLen = sizeof(addressClient);
     initServerStateModel(block);
-    //initResponse(resp);
+    initResponse(resp);
 
     while(runStatus){
         cfd = accept(sfd, (SA*)&addressClient, &addressLen);

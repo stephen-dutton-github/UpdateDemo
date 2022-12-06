@@ -76,13 +76,13 @@ void* onShutdownResponse(pRequest req, pResponse resp){
 }
 
 void* onMessageResponse(pRequest req, pResponse resp){
-    printf("Message response from server. the message:\n%s\n was displayed\n", resp->data);
+    printf("Message response from server. the message:\n%s\n was displayed\n", resp->version);
 }
 
 void* onAuxiliaryResponse(pRequest req, pResponse resp){
-    printf("Auxiliary response: %s", resp->data);
+    printf("Auxiliary response: %s", resp->msgBuffer);
 }
 
 void* onUpdateResponse(pRequest req, pResponse resp){
-    printf("updated function name: %s", resp->currentFunctionName);
+    printf("updated function name: %s", resp->newSymbolName);
 }

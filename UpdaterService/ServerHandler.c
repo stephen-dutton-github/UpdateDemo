@@ -72,7 +72,9 @@ void* onUpdateRequest(pRequest req, pResponse resp, pStateBlock block){
     block->version = req->version;
     block->action = req->cmd;
 
-};
+}
+
+
 void* onMessageRequest(pRequest req, pResponse resp, pStateBlock block){
     block->trunkHandler(block);
 };
