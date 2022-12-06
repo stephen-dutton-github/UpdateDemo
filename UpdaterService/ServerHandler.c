@@ -53,8 +53,8 @@ void* callServerHandler(pRequest req, pResponse resp, pStateBlock block)
 
 void* onVersionRequest(pRequest req, pResponse resp, pStateBlock block){
     ///TODO: set up response indicating what the values of the server block are
-    strcpy(resp->currentFunctionName, block->symbolName);
-    strcpy(resp->libPath,block->path);
+    strcpy(resp->currentSymbolName, block->symbolName);
+    strcpy(resp->libPath,block->libPath);
     resp->version = block->version;
     resp->responseTo = block->action;
 }
@@ -67,8 +67,8 @@ void* onAuxiliaryRequest(pRequest req, pResponse resp, pStateBlock block){
     block->trunkHandler(block);
 };
 void* onUpdateRequest(pRequest req, pResponse resp, pStateBlock block){
-    block->symbolName = req->symbolName;
-    block->path = req->libPath;
+    strcpy(block->symbolName,req->symbolName);
+    strcpy(block->libPath, req->libPath);
     block->version = req->version;
     block->action = req->cmd;
 

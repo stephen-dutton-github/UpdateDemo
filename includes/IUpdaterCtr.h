@@ -30,9 +30,10 @@ typedef enum {SUCCESS, FAILURE} Status;
 typedef struct TrunkStateBlock{
     Version version;
     Action action;
-    char* path;
-    char* symbolName;
-    char* message;
+    char commandAux[MAX_BUFFER];
+    char msgBuffer[MAX_MSG_BUFFER];
+    char symbolName[MAX_BUFFER];
+    char libPath[MAX_PATH];
     void(*trunkHandler)(struct TrunkStateBlock*);
     void(*progressHandler)(int*,int*);
 } StateBlock, *pStateBlock;

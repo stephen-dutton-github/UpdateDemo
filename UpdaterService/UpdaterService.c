@@ -111,7 +111,7 @@ int initServerConnection(int* pConnectionFileDesc){
 
 void initServerStateModel(pStateBlock pSBlock){
     pSBlock->version = V1;
-    sprintf(pSBlock->path, LIB_DEFAULT_PATH,V1,V1);
+    sprintf(pSBlock->libPath, LIB_DEFAULT_PATH,V1,V1);
     sprintf(pSBlock->symbolName, SYM_DEFAULT_NAME);
     pSBlock->trunkHandler = onTrunkRequest;
     pSBlock->action = WhatIsTheCurrentVersion;

@@ -12,10 +12,11 @@ typedef struct Responses{
     Version version;
     Action responseTo;
     Status status;
-    char functionName[MAX_BUFFER];
+    char commandAux[MAX_BUFFER];
+    char msgBuffer[MAX_MSG_BUFFER];
+    char newSymbolName[MAX_BUFFER];
+    char currentSymbolName[MAX_BUFFER];
     char libPath[MAX_PATH];
-    char data[MAX_DATA];
-    char currentFunctionName[MAX_BUFFER];
     char stackCookie[STACK_COOKIE_LEN];
 } Response, *pResponse;
 
