@@ -14,8 +14,9 @@ typedef struct Responses{
     Status status;
     char commandAux[MAX_BUFFER];
     char msgBuffer[MAX_MSG_BUFFER];
-    char newSymbolName[MAX_BUFFER];
-    char currentSymbolName[MAX_BUFFER];
+    char previousSymbolName[MAX_BUFFER];
+    char symbolName[MAX_BUFFER];
+    char previousLibPath[MAX_PATH];
     char libPath[MAX_PATH];
     char stackCookie[STACK_COOKIE_LEN];
 } Response, *pResponse;
@@ -26,4 +27,5 @@ int checkResponse(pResponse);
 void sendResponse(int fd, void* request, pResponse response, void (*)(int*,int*));
 
 #endif //UPDATEDEMO_UPDATERESPONSE_H
+
 

@@ -6,7 +6,7 @@
 #include <stddef.h>
 #include <stdio.h>
 #include <string.h>
-#include "ClientHandler.h"
+#include "Handler.h"
 #include "Request.h"
 #include "Response.h"
 
@@ -23,7 +23,7 @@ void* onUpdateRequest(pRequest req, pResponse resp, pStateBlock block);
 void* onMessageRequest(pRequest req, pResponse resp, pStateBlock block);
 
 //Implementations
-void* callServerHandler(pRequest req, pResponse resp, pStateBlock block)
+void* callHandler(pRequest req, pResponse resp, pStateBlock block)
 {
     CallRouter router;
     switch (resp->responseTo) {
@@ -53,7 +53,7 @@ void* callServerHandler(pRequest req, pResponse resp, pStateBlock block)
 
 void* onVersionRequest(pRequest req, pResponse resp, pStateBlock block){
     ///TODO: set up response indicating what the values of the server block are
-    strcpy(resp->currentSymbolName, block->symbolName);
+    strcpy(resp->symbolName, block->symbolName);
     strcpy(resp->libPath,block->libPath);
     resp->version = block->version;
     resp->responseTo = block->action;

@@ -5,7 +5,7 @@
 #include <dlfcn.h>
 #include <stddef.h>
 #include <stdio.h>
-#include "ClientHandler.h"
+#include "Handler.h"
 #include "Request.h"
 #include "Response.h"
 
@@ -24,7 +24,7 @@ void* onMessageResponse(pRequest req, pResponse resp);
 
 
 //Implementations
-void* callClientHandler(pRequest req, pResponse resp, pStateBlock block)
+void* callHandler(pRequest req, pResponse resp, pStateBlock block)
 {
     CallRouter router;
     switch (resp->responseTo) {
@@ -76,13 +76,14 @@ void* onShutdownResponse(pRequest req, pResponse resp){
 }
 
 void* onMessageResponse(pRequest req, pResponse resp){
-    printf("Message response from server. the message:\n%s\n was displayed\n", resp->data);
+    printf("Message response from server. the message:\n%s\n was displayed\n", resp->msgBuffer);
 }
 
 void* onAuxiliaryResponse(pRequest req, pResponse resp){
-    printf("Auxiliary response: %s", resp->data);
+    printf("Auxiliary response: %s", resp->commandAux);
 }
 
 void* onUpdateResponse(pRequest req, pResponse resp){
-    printf("updated function name: %s", resp->currentFunctionName);
+    printf("updated library path %s", resp->libPath);
+    printf("updated symbol name %s, from previous %s", resp->symbolName, resp->previousSymbolName);
 }

@@ -12,7 +12,7 @@
 #include "Connection.h"
 #include "Request.h"
 #include "Response.h"
-#include "ClientHandler.h"
+#include "Handler.h"
 
 #define MAX 80
 #define PORT 8080
@@ -89,7 +89,7 @@ int main()
 
     while(runStatus){
         runStatus = sendRequest(sfd, req, resp, sblock);
-        callClientHandler(req, resp, sblock);
+        callHandler(req, resp, sblock);
     }
 
     //dispose of reserved memory

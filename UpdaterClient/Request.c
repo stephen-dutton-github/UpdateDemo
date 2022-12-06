@@ -59,7 +59,7 @@ int sendRequest(int fd, pRequest request, void* response, pStateBlock blk)
             }
         } else{
             blk->action = DisplayMessage;
-            blk->message = "Read Error in request Handler";
+            strcpy(blk->msgBuffer,"Read Error in request Handler");
             blk->trunkHandler(blk);
         }
     }
