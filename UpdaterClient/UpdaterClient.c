@@ -100,13 +100,13 @@ int main()
 
     pthread_create(&tid,NULL,&__heartBeat,(void*)threadArgs);
 
-    pthread_join
+    pthread_join(tid, NULL);
 
-    while(runStatus){
+    /*while(runStatus){
         sfd = initClientConnection(NULL);
         sendRequest(sfd, req, rep);
         callHandler(req, rep, NULL);
-    }
+    }*/
 
     //dispose of reserved memory
     pthread_mutex_destroy(&lock);
