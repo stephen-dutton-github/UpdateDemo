@@ -38,7 +38,6 @@ int sendRequest(int fd, pRequest request, void* response) {
     int lastValue = 0;
     bzero(response, sizeof(Response));
 
-    printf("Sending request...\n");
     lastValue = write(fd,request, sizeof(Request));
     if(lastValue < 0){
         printf("Error sending the packet\n");
@@ -46,7 +45,6 @@ int sendRequest(int fd, pRequest request, void* response) {
     }
 
     lastValue = read(fd, response, sizeof(Response));
-    printf("Response received...\n");
 
     if(lastValue < 0){
         printf("Error reading the packet\n");

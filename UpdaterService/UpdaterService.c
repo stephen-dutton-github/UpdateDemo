@@ -2,6 +2,7 @@
 // Created by sdutton on 29.11.22.
 //
 
+#include <signal.h>
 #include "IUpdaterCtr.h"
 #include "Connection.h"
 #include "Request.h"
@@ -32,10 +33,17 @@ void onTrunkRequest(pStateBlock blck){
     }
 }
 
-
+void killSignalHandler(int sg){
+    printf("Server Process closing...");
+    runStatus =0;
+}
 
 int main()
 {
+    if(signal(SIGINT,killSignalHandler) == SIG_ERR){
+        printf("SIGINT Cannot be trapped");
+    }
+
     struct sockaddr_in addressLocal, addressClient;
     socklen_t addressLen;
     int cfd=0;  //Connection file descriptor

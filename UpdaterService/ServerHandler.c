@@ -18,6 +18,7 @@ typedef void* (*CallRouter)(pRequest,pResponse,pStateBlock block) ;
 //Prototypes
 void* onVersionRequest(pRequest req, pResponse resp, pStateBlock block);
 void* onShutdownRequest(pRequest req, pResponse resp, pStateBlock block);
+void* onShutdownServerRequest(pRequest req, pResponse resp, pStateBlock block);
 void* onAuxiliaryRequest(pRequest req, pResponse resp, pStateBlock block);
 void* onUpdateRequest(pRequest req, pResponse resp, pStateBlock block);
 void* onMessageRequest(pRequest req, pResponse resp, pStateBlock block);
@@ -26,7 +27,7 @@ void* onMessageRequest(pRequest req, pResponse resp, pStateBlock block);
 void* callHandler(pRequest req, pResponse resp, pStateBlock block)
 {
     CallRouter router;
-    switch (resp->responseTo) {
+    switch (req->cmd) {
         case WhatIsTheCurrentVersion:
             router = onVersionRequest;
             break;
@@ -36,7 +37,7 @@ void* callHandler(pRequest req, pResponse resp, pStateBlock block)
             break;
 
         case ShutDownServer:
-            router = onShutdownRequest;
+            router = onShutdownServerRequest;
             break;
 
         case Aux:
@@ -65,12 +66,17 @@ void* onVersionRequest(pRequest req, pResponse resp, pStateBlock block){
 
 void* onShutdownRequest(pRequest req, pResponse resp, pStateBlock block){
     ///TODO: Think of some imaginary task domain
-    if(req->cmd == Shutdown){
+    printf("Remote client process ending...");
+};
+
+void* onShutdownServerRequest(pRequest req, pResponse resp, pStateBlock block){
+    ///TODO: Think of some imaginary task domain
+    if(req->cmd == ShutDownServer){
         printf("Full shutdown, server process ending...");
     }
-
     block->trunkHandler(block);
-};
+}
+
 void* onAuxiliaryRequest(pRequest req, pResponse resp, pStateBlock block){
     ///TODO: Think of some imaginary task domain
     if(req->cmd == Shutdown){
@@ -84,10 +90,9 @@ void* onUpdateRequest(pRequest req, pResponse resp, pStateBlock block){
     strcpy(block->libPath, req->libPath);
     block->version = req->version;
     block->action = req->cmd;
-
 }
 
 
 void* onMessageRequest(pRequest req, pResponse resp, pStateBlock block){
-    block->trunkHandler(block);
+    printf("Message from Client: %s", req->msgBuffer);
 };

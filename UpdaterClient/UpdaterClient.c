@@ -2,6 +2,7 @@
 // Created by sdutton on 29.11.22.
 //
 #include <arpa/inet.h> // inet_addr()
+
 #include <pthread.h>
 #include <netdb.h>
 #include <stdio.h>
@@ -15,6 +16,7 @@
 #include "Response.h"
 #include "Handler.h"
 
+
 #define MAX 80
 #define PORT 8080
 #define SA struct sockaddr
@@ -22,11 +24,13 @@
 
 
 typedef struct __threadArgs{
+    int runStatus;
     int* fd;
     pRequest req;
     pResponse rep;
-    void* (*heartbeatCallBack)(void*);
+    void* (*heartBeatCallBack)(void*);
 } tArgs, *pTArgs;
+
 
 int initClientConnection(void* data){
     int sfd;
@@ -70,18 +74,26 @@ void onProgress(int* current, int* target){
     double perc= (descr / denom);
     printf(PROGRESS_MASK, perc);
 }
-void* __heartBeat(void*);
-void* __heartBeatCallback(void*);
-
+void* heartBeat(void*);
+void* heartBeatCallback(void*);
 
 int runStatus = 1;
 pthread_t tid;
-pthread_mutex_t lock;
+pthread_mutex_t lock, cb_lockl;
+
+
 
 int main()
 {
+
+
     if(pthread_mutex_init(&lock, NULL) != 0){
-        printf("\n mutex init failed\n");
+        printf("server mutex init failed\n");
+        return -1;
+    }
+
+    if(pthread_mutex_init(&cb_lockl, NULL) != 0){
+        printf("callback mutex init failed\n");
         return -1;
     }
 
@@ -96,18 +108,65 @@ int main()
     threadArgs->fd = &sfd;
     threadArgs->rep=rep;
     threadArgs->req=req;
-    threadArgs->heartbeatCallBack = __heartBeatCallback;
+    threadArgs->heartBeatCallBack = heartBeatCallback;
+    {
+        pthread_create(&tid, NULL, &heartBeat, (void *) threadArgs);
+    }
+    //allow for startup server query
+    sleep(2);
 
-    pthread_create(&tid,NULL,&__heartBeat,(void*)threadArgs);
+    while(runStatus){
+
+        pthread_mutex_lock(&lock);
+            char inputBuffer[2];
+            char previous[1];
+            printf("Options: 1-4\n");
+            printf("1). Set implementation Version to V1 \n");
+            printf("2). Set implementation Version to V2 \n");
+            printf("3). Quit the Client Application\n");
+            printf("4). Close Server and Client\n");
+            while(1)
+            {
+                ///TODO:Modify buffer for UNICODE standard
+                fgets(inputBuffer, sizeof(inputBuffer), stdin);
+                if(inputBuffer[0] =='\n')
+                    break;
+                previous[0] =inputBuffer[0];
+            }
+
+            if(atoi(previous) < 1 || atoi(previous) > 4 ){
+                inputBuffer[0] = '\0';
+                printf("Ignored\n");
+                //prevent locking from a synchronized context in case of continuation
+                pthread_mutex_unlock(&lock);
+                continue;
+            }
+
+        printf("Option %d selected please wait...\n",atoi(previous));
+            switch(atoi(previous)){
+                case 1:
+                    threadArgs->req->cmd = Update;
+                    threadArgs->req->version = V1;
+                    threadArgs->req->version = V1;
+                    sprintf(threadArgs->req->libPath,LIB_DEFAULT_PATH,V1,V1);
+                    break;
+                case 2:
+                    threadArgs->req->cmd = Update;
+                    threadArgs->req->version = V2;
+                    sprintf(threadArgs->req->libPath,LIB_DEFAULT_PATH,V2,V2);
+                    break;
+                case 3:
+                    threadArgs->req->cmd = Shutdown;
+                    break;
+                case 4:
+                    threadArgs->req->cmd = ShutDownServer;
+                    break;
+            }
+        pthread_mutex_unlock(&lock);
+        sleep(5);
+    }
 
     pthread_join(tid, NULL);
-
-    /*while(runStatus){
-        sfd = initClientConnection(NULL);
-        sendRequest(sfd, req, rep);
-        callHandler(req, rep, NULL);
-    }*/
-
     //dispose of reserved memory
     pthread_mutex_destroy(&lock);
     free(threadArgs);
@@ -116,24 +175,26 @@ int main()
     closeConnection(sfd);
 }
 
-void* __heartBeat(void* data){
-
+void* heartBeat(void* data){
     pTArgs pArgs = (pTArgs)data;
 
     while(runStatus){
         //Grab the lock
         pthread_mutex_lock(&lock);
-        *pArgs->fd = initClientConnection(NULL);
-        sendRequest(*pArgs->fd, pArgs->req, pArgs->rep);
-        callHandler(pArgs->req, pArgs->rep, NULL);
+        {
+            *pArgs->fd = initClientConnection(NULL);
+            sendRequest(*pArgs->fd, pArgs->req, pArgs->rep);
+            callHandler(pArgs->req, pArgs->rep, NULL);
+            pArgs->heartBeatCallBack(pArgs);
+        }
         //release access to input function
         pthread_mutex_unlock(&lock);
-        sleep(5);
+        sleep(3);
     }
 
 }
 
 
-void* __hbCallback(void* data){
-
+void* heartBeatCallback(void* data){
+    //
 }
