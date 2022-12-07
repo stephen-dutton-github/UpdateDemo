@@ -68,6 +68,7 @@ void closeConnection(int fd){
 void onTrunkRequest(pStateBlock block){
 
 }
+
 void onProgress(int* current, int* target){
     double descr=100.0*((double)*current);
     double denom=100.0*((double)*target);

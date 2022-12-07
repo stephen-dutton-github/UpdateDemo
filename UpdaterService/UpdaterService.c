@@ -27,21 +27,21 @@ void initServerStateModel(pStateBlock);
 
 void onTrunkRequest(pStateBlock blck){
     switch (blck->action) {
-        case Shutdown:
+        case ShutDownServer:
             runStatus = 0;
             break;
     }
 }
 
-void killSignalHandler(int sg){
+void sigHandler(int sg){
+    runStatus=0;
     printf("Server Process closing...");
-    runStatus =0;
 }
 
 int main()
 {
-    if(signal(SIGINT,killSignalHandler) == SIG_ERR){
-        printf("SIGINT Cannot be trapped");
+    if(signal(9,sigHandler) == SIG_ERR){
+        printf("SIGTERM Cannot be trapped");
     }
 
     struct sockaddr_in addressLocal, addressClient;
@@ -77,7 +77,6 @@ int main()
         write(cfd,resp,sizeof(Response));
         close(cfd);
     }
-
     closeConnection(sfd);
     printf("Server Exit...\n");
 }

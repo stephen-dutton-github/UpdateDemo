@@ -65,15 +65,15 @@ void* onVersionRequest(pRequest req, pResponse resp, pStateBlock block){
 }
 
 void* onShutdownRequest(pRequest req, pResponse resp, pStateBlock block){
+
     ///TODO: Think of some imaginary task domain
     printf("Remote client process ending...");
+    resp->responseTo = Shutdown;
+
 };
 
 void* onShutdownServerRequest(pRequest req, pResponse resp, pStateBlock block){
-    ///TODO: Think of some imaginary task domain
-    if(req->cmd == ShutDownServer){
-        printf("Full shutdown, server process ending...");
-    }
+    printf("Full shutdown, server process ending...");
     block->trunkHandler(block);
 }
 
