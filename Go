@@ -1,0 +1,6 @@
+#!/bin/bash
+cd ./cmake-build-debug || exit
+make
+cd ./UpdaterClient/ || exit
+../UpdaterService/UpdaterService &
+./UpdaterClient

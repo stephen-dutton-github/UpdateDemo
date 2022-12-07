@@ -16,12 +16,15 @@
 #include "Response.h"
 #include "Handler.h"
 
-
 #define MAX 80
 #define PORT 8080
 #define SA struct sockaddr
-#define SERVER_EXE "../UpdaterService/UpdaterService &"
 
+void* heartBeat(void*);
+void* heartBeatCallback(void*);
+int runStatus = 1;
+pthread_t tid;
+pthread_mutex_t lock, cb_lockl;
 
 typedef struct __threadArgs{
     int runStatus;
@@ -35,7 +38,6 @@ typedef struct __threadArgs{
 int initClientConnection(void* data){
     int sfd;
     struct sockaddr_in serverAddress;
-
     sfd = socket(AF_INET, SOCK_STREAM, 0);
     if (sfd == -1) {
         printf("socket creation failed...\n");
@@ -44,29 +46,17 @@ int initClientConnection(void* data){
 
     printf("Socket successfully created..\n");
     bzero(&serverAddress, sizeof(serverAddress));
-
     serverAddress.sin_family = AF_INET;
     serverAddress.sin_addr.s_addr = inet_addr("127.0.0.1");
     serverAddress.sin_port = htons(PORT);
-
-    int retry = 0;
-    int server = 0;
-
     if (connect(sfd, (SA *) &serverAddress, sizeof(serverAddress)) != 0)
     {
         printf("Connection failed... \nTrying to start server...\n Please Wait..\n");
         exit(-1);
     }
+
     printf("connected to the server..\n");
-
     return sfd;
-}
-void closeConnection(int fd){
-    close(fd);
-    printf("server connection closed.. (and any other clear up)\n");
-}
-void onTrunkRequest(pStateBlock block){
-
 }
 
 void onProgress(int* current, int* target){
@@ -75,19 +65,11 @@ void onProgress(int* current, int* target){
     double perc= (descr / denom);
     printf(PROGRESS_MASK, perc);
 }
-void* heartBeat(void*);
-void* heartBeatCallback(void*);
-
-int runStatus = 1;
-pthread_t tid;
-pthread_mutex_t lock, cb_lockl;
 
 
 
 int main()
 {
-
-
     if(pthread_mutex_init(&lock, NULL) != 0){
         printf("server mutex init failed\n");
         return -1;
@@ -117,63 +99,64 @@ int main()
     sleep(2);
 
     while(runStatus){
-
         pthread_mutex_lock(&lock);
-            char inputBuffer[2];
-            char previous[1];
-            printf("\nOptions: 1-4\n");
-            printf("1). Set implementation Version to V1 \n");
-            printf("2). Set implementation Version to V2 \n");
-            printf("3). Quit the Client Application\n");
-            printf("4). Close Server and Client\n");
-            while(1)
-            {
-                ///TODO:Modify buffer for UNICODE standard
-                fgets(inputBuffer, sizeof(inputBuffer), stdin);
-                if(inputBuffer[0] =='\n')
-                    break;
-                previous[0] =inputBuffer[0];
-            }
+        char inputBuffer[2];
+        char previous[1];
+        printf("\nOptions: 1-4\n");
+        printf("1). Set implementation Version to V1 \n");
+        printf("2). Set implementation Version to V2 \n");
+        printf("3). Quit the Client Application\n");
+        printf("4). Close Server and Client\n");
+        while(1)
+        {
+            ///TODO:Modify buffer for UNICODE standard
+            fgets(inputBuffer, sizeof(inputBuffer), stdin);
+            if(inputBuffer[0] =='\n')
+                break;
+            previous[0] =inputBuffer[0];
+        }
 
-            if(atoi(previous) < 1 || atoi(previous) > 4 ){
-                inputBuffer[0] = '\0';
-                printf("Ignored\n");
-                //prevent locking from a synchronized context in case of continuation
-                pthread_mutex_unlock(&lock);
-                continue;
-            }
+        if(atoi(previous) < 1 || atoi(previous) > 4 ){
+            inputBuffer[0] = '\0';
+            printf("Ignored\n");
+
+            //prevent locking from a synchronized context in case of continuation
+            pthread_mutex_unlock(&lock);
+            sleep(2);
+            continue;
+        }
 
         printf("Option %d selected please wait...\n",atoi(previous));
-            switch(atoi(previous)){
-                case 1:
-                    threadArgs->req->cmd = Update;
-                    threadArgs->req->version = V1;
-                    threadArgs->req->version = V1;
-                    sprintf(threadArgs->req->libPath,LIB_DEFAULT_PATH,V1,V1);
-                    break;
-                case 2:
-                    threadArgs->req->cmd = Update;
-                    threadArgs->req->version = V2;
-                    sprintf(threadArgs->req->libPath,LIB_DEFAULT_PATH,V2,V2);
-                    break;
-                case 3:
-                    threadArgs->req->cmd = Shutdown;
-                    break;
-                case 4:
-                    threadArgs->req->cmd = ShutDownServer;
-                    break;
-            }
+        switch(atoi(previous)){
+            case 1:
+                threadArgs->req->cmd = Update;
+                threadArgs->req->version = V1;
+                threadArgs->req->version = V1;
+                sprintf(threadArgs->req->libPath,LIB_DEFAULT_PATH,V1,V1);
+                break;
+            case 2:
+                threadArgs->req->cmd = Update;
+                threadArgs->req->version = V2;
+                sprintf(threadArgs->req->libPath,LIB_DEFAULT_PATH,V2,V2);
+                break;
+            case 3:
+                threadArgs->req->cmd = Shutdown;
+                runStatus = 0;
+                break;
+            case 4:
+                threadArgs->req->cmd = ShutDownServer;
+                runStatus = 0;
+                break;
+        }
         pthread_mutex_unlock(&lock);
-        sleep(5);
+        sleep(2);
     }
-
-    pthread_join(tid, NULL);
     //dispose of reserved memory
     pthread_mutex_destroy(&lock);
     free(threadArgs);
     free(req);
     free(rep);
-    closeConnection(sfd);
+    close(sfd);
 }
 
 void* heartBeat(void* data){

@@ -82,6 +82,7 @@ void* onShutdownServerRequest(pRequest req, pResponse resp, pStateBlock block){
     block->trunkHandler(block);
 }
 
+
 void* onAuxiliaryRequest(pRequest req, pResponse resp, pStateBlock block){
     ///TODO: Think of some imaginary task domain
     if(req->cmd == Shutdown){

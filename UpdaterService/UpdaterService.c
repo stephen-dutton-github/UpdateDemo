@@ -24,17 +24,12 @@ int volatile runStatus = 1;
 pStateBlock block;
 void initServerStateModel(pStateBlock);
 
-
-void onTrunkRequest(pStateBlock blck){
-    switch (blck->action) {
-        case ShutDownServer:
-            runStatus = 0;
-            break;
-    }
-}
-
 int cfd=0;  //Connection file descriptor
 int sfd=0;  //socket file descriptor
+
+
+
+
 
 void __SIGTERM(int sig){
     runStatus=0;
@@ -42,6 +37,14 @@ void __SIGTERM(int sig){
     closeConnection(sfd);
     printf("Server Exit...\n");
     exit(0);
+}
+
+void onTrunkRequest(pStateBlock blck){
+    switch (blck->action) {
+        case ShutDownServer:
+            __SIGTERM(15);
+            break;
+    }
 }
 
 int main()

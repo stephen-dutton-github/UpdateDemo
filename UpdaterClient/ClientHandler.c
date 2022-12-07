@@ -77,19 +77,28 @@ void* onVersionResponse(pRequest req, pResponse resp){
     gettimeofday(&tv, NULL);
     tm_info = localtime(&tv.tv_sec);
     strftime(tBuffer, 26, "%Y:%m:%d %H:%M:%S", tm_info);
+    /*
+        //--- Create temp file for Data Stream
+        strcpy(tempSoFilePath, "/tmp/lib_temp_XXXXXXX");
 
-    //--- Create temp file for Data Stream
-    strcpy(tempSoFilePath, "/tmp/lib_temp_XXXXXXX");
+        int fd = mkstemp(tempSoFilePath);
+        FILE* tempSo = fdopen(fd, "r+");
 
-    int fd = mkstemp(tempSoFilePath);
-    FILE* tempSo = fdopen(fd, "r+");
-
-    //Crack open tempFile and use it as a lib.so type file
-    write(fd,resp->assemblyData, sizeof(unsigned char) * resp->assemblyDataSize);
-    close(fd);
+        //Crack open tempFile and use it as a lib.so type file
+        write(fd,resp->assemblyData, sizeof(unsigned char) * resp->assemblyDataSize+1);
+        close(fd);
+    */
 
     VersionMessageHandler versionMessageHandler;
-    void* hLib = dlopen(tempSoFilePath, RTLD_LAZY);
+    if(resp->libPath[0] == '\0'){
+        strcpy(resp->libPath, req->libPath);
+    }
+
+    if(resp->symbolName[0] == '\0'){
+        strcpy(resp->symbolName, req->symbolName);
+    }
+
+    void* hLib = dlopen(resp->libPath, RTLD_LAZY);
     if(hLib == NULL){
         printf("loading error %s", dlerror());
         return 0;
@@ -103,7 +112,6 @@ void* onVersionResponse(pRequest req, pResponse resp){
     printf("\r \b \b");
     printf("Message version received from server: %s %s\n", theMessage, tBuffer);
     dlclose(hLib);
-
 }
 
 void* onShutdownResponse(pRequest req, pResponse resp){
