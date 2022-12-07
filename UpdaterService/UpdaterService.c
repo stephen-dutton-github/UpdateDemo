@@ -20,7 +20,7 @@
 #define PORT 8080
 #define SA struct sockaddr
 
-int runStatus = 1;
+int volatile runStatus = 1;
 pStateBlock block;
 void initServerStateModel(pStateBlock);
 
@@ -33,21 +33,30 @@ void onTrunkRequest(pStateBlock blck){
     }
 }
 
-void sigHandler(int sg){
+int cfd=0;  //Connection file descriptor
+int sfd=0;  //socket file descriptor
+
+void __SIGTERM(int sig){
     runStatus=0;
-    printf("Server Process closing...");
+    printf("Server Process closing...SIGNAL %d received\n", sig);
+    closeConnection(sfd);
+    printf("Server Exit...\n");
+    exit(0);
 }
 
 int main()
 {
-    if(signal(9,sigHandler) == SIG_ERR){
-        printf("SIGTERM Cannot be trapped");
+    if(signal(SIGTERM, __SIGTERM) == SIG_ERR){
+        printf("SIGTERM Cannot be trapped\n");
+    }
+
+    if(signal(SIGINT, __SIGTERM) == SIG_ERR){
+        printf("SIGINT Cannot be trapped\n");
     }
 
     struct sockaddr_in addressLocal, addressClient;
     socklen_t addressLen;
-    int cfd=0;  //Connection file descriptor
-    int sfd=0;  //socket file descriptor
+
     int rct = 0; //read count
     int msgLen = 0;
     pRequest req = malloc(sizeof(Request));
@@ -60,7 +69,12 @@ int main()
     initServerStateModel(block);
     initResponse(resp);
 
-    while(runStatus){
+    while(1){
+        if(runStatus == 0){
+            printf("Run status: %d", runStatus);
+            break;
+        }
+
         cfd = accept(sfd, (SA*)&addressClient, &addressLen);
         if (cfd < 0) {
             printf("server accept failed...\n");
@@ -76,9 +90,8 @@ int main()
         callHandler(req,resp,block);
         write(cfd,resp,sizeof(Response));
         close(cfd);
+        sleep(2);   //Allow sig-handlers to modify runStatus
     }
-    closeConnection(sfd);
-    printf("Server Exit...\n");
 }
 
 void closeConnection(int fd){

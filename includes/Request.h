@@ -11,6 +11,8 @@ typedef struct Requests{
     Envelope envelope;
     Version version;
     Action cmd;
+    unsigned int assemblyDataSize;
+    unsigned char assemblyData[MAX_ASM_SIZE];
     char commandAux[MAX_BUFFER];
     char msgBuffer[MAX_MSG_BUFFER];
     char symbolName[MAX_BUFFER];

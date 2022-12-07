@@ -121,7 +121,7 @@ int main()
         pthread_mutex_lock(&lock);
             char inputBuffer[2];
             char previous[1];
-            printf("Options: 1-4\n");
+            printf("\nOptions: 1-4\n");
             printf("1). Set implementation Version to V1 \n");
             printf("2). Set implementation Version to V2 \n");
             printf("3). Quit the Client Application\n");

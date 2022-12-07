@@ -12,6 +12,8 @@ typedef struct Responses{
     Version version;
     Action responseTo;
     Status status;
+    unsigned int assemblyDataSize;
+    unsigned char assemblyData[MAX_ASM_SIZE];
     char commandAux[MAX_BUFFER];
     char msgBuffer[MAX_MSG_BUFFER];
     char previousSymbolName[MAX_BUFFER];

@@ -4,9 +4,15 @@
 
 #include <stdio.h>
 #include <sys/time.h>
+#include <sys/mman.h>
 #include <time.h>
 #include <dlfcn.h>
 #include <stddef.h>
+#include <fcntl.h>
+#include<stdlib.h>
+#include<unistd.h>
+#include<string.h>
+#include <errno.h>
 #include "Handler.h"
 #include "Request.h"
 #include "Response.h"
@@ -24,7 +30,7 @@ void* onAuxiliaryResponse(pRequest req, pResponse resp);
 void* onUpdateResponse(pRequest req, pResponse resp);
 void* onMessageResponse(pRequest req, pResponse resp);
 
-
+extern int errno ;
 
 //Implementations
 void* callHandler(pRequest req, pResponse resp, pStateBlock block)
@@ -62,26 +68,42 @@ void* callHandler(pRequest req, pResponse resp, pStateBlock block)
 void* onVersionResponse(pRequest req, pResponse resp){
 
     char tBuffer[26];
+    char tempSoFilePath[22];
+    unsigned char tempSoFileData[resp->assemblyDataSize];
     struct tm* tm_info;
     struct timeval tv;
 
+    //---- Create Timestamp
     gettimeofday(&tv, NULL);
     tm_info = localtime(&tv.tv_sec);
     strftime(tBuffer, 26, "%Y:%m:%d %H:%M:%S", tm_info);
+
+    //--- Create temp file for Data Stream
+    strcpy(tempSoFilePath, "/tmp/lib_temp_XXXXXXX");
+
+    int fd = mkstemp(tempSoFilePath);
+    FILE* tempSo = fdopen(fd, "r+");
+
+    //Crack open tempFile and use it as a lib.so type file
+    write(fd,resp->assemblyData, sizeof(unsigned char) * resp->assemblyDataSize);
+    close(fd);
+
     VersionMessageHandler versionMessageHandler;
-    void* hLib = dlopen(resp->libPath, RTLD_LAZY);
+    void* hLib = dlopen(tempSoFilePath, RTLD_LAZY);
     if(hLib == NULL){
-        printf("The message version %u cannot be loaded", resp->version);
+        printf("loading error %s", dlerror());
         return 0;
     }
-    void* data = "Any data";
-    versionMessageHandler = (VersionMessageHandler)dlsym(hLib, req->symbolName);
 
-    //risky on main thread... let's crash the client
+    void* data = "Any data";
+    versionMessageHandler = (VersionMessageHandler)dlsym(hLib, resp->symbolName);
+
+    //----- risky on main thread... let's not crash the client (now threaded)
     char * restrict theMessage = versionMessageHandler(data);
     printf("\r \b \b");
     printf("Message version received from server: %s %s\n", theMessage, tBuffer);
     dlclose(hLib);
+
 }
 
 void* onShutdownResponse(pRequest req, pResponse resp){
@@ -95,15 +117,15 @@ void* onMessageResponse(pRequest req, pResponse resp){
 }
 
 void* onAuxiliaryResponse(pRequest req, pResponse resp){
-    printf("Auxiliary response: %s", resp->commandAux);
+
 }
 
 void* onUpdateResponse(pRequest req, pResponse resp){
-    printf("updated library path %s", resp->libPath);
-    printf("updated symbol name %s, from previous %s", resp->symbolName, resp->previousSymbolName);
+    printf("Update requested: %s", resp->msgBuffer);
     onVersionResponse(req,resp);
 }
 
 void* onShutdownServerResponse(pRequest req, pResponse resp){
 
 }
+

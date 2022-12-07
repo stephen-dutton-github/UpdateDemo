@@ -9,6 +9,7 @@
 #include "Handler.h"
 #include "Request.h"
 #include "Response.h"
+#include "VersionSwitch.h"
 
 // dlopen, dlsym, dlclose
 
@@ -58,10 +59,14 @@ void* callHandler(pRequest req, pResponse resp, pStateBlock block)
 
 void* onVersionRequest(pRequest req, pResponse resp, pStateBlock block){
     ///TODO: set up response indicating what the values of the server block are
+
+    getBinaryVersion(req->version,block->assemblyData,&block->assemblyDataSize);
     strcpy(resp->symbolName, block->symbolName);
     strcpy(resp->libPath,block->libPath);
     resp->version = block->version;
     resp->responseTo = block->action;
+    resp->assemblyDataSize = block->assemblyDataSize;
+    strcpy(resp->assemblyData, block->assemblyData);
 }
 
 void* onShutdownRequest(pRequest req, pResponse resp, pStateBlock block){
@@ -90,6 +95,7 @@ void* onUpdateRequest(pRequest req, pResponse resp, pStateBlock block){
     strcpy(block->libPath, req->libPath);
     block->version = req->version;
     block->action = req->cmd;
+    getBinaryVersion(req->version,req->assemblyData,&req->assemblyDataSize);
 }
 
 

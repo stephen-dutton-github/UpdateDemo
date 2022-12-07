@@ -12,6 +12,7 @@
 #define MAX_BUFFER 64
 #define MAX_MSG_BUFFER 140
 #define STACK_COOKIE_LEN 40
+#define MAX_ASM_SIZE 262144
 #define PROGRESS_MASK "Working %02f"
 
 
@@ -30,10 +31,13 @@ typedef enum {SUCCESS, FAILURE} Status;
 typedef struct TrunkStateBlock{
     Version version;
     Action action;
+    unsigned int assemblyDataSize;
+    unsigned char assemblyData[MAX_ASM_SIZE];
     char commandAux[MAX_BUFFER];
     char msgBuffer[MAX_MSG_BUFFER];
     char symbolName[MAX_BUFFER];
     char libPath[MAX_PATH];
+
     void(*trunkHandler)(struct TrunkStateBlock*);
     void(*progressHandler)(int*,int*);
 } StateBlock, *pStateBlock;
@@ -44,4 +48,5 @@ char* restrict getVersionMessage(void*);
 
 
 #endif //UPDATEDEMO_ABIDEFINITION_H
+
 
